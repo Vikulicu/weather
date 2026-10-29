@@ -10,6 +10,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 :root{--bg:#101912;--card:#1A281B;--brown:#3B2E20;--soil:#35271A;--bar:#2A1F15;--ink:#EDE6D6;--mute:#A8B39B;--leaf:#86C46F;--tan:#D9A25C;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{margin:0;min-height:100%;background:var(--bg)}
@@ -64,11 +65,51 @@ footer{margin-top:20px;font-size:12px;color:var(--mute);display:flex;justify-con
 .day .r{text-align:right;color:var(--leaf)}
 .loc{width:100%;min-height:46px;margin-top:18px;border-radius:23px;border:1px solid var(--brown);background:none}
 :focus-visible{outline:2px solid var(--leaf);outline-offset:2px}
+main{padding-bottom:110px}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:8;background:var(--bar);border-top:1px solid var(--brown);display:flex;justify-content:space-around;gap:0;padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+.nb{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0;min-height:48px;justify-content:center;background:none;border:0;color:var(--mute);font-size:12px;font-weight:500}
+.nb[aria-current=page]{color:var(--leaf)}
+.seg{display:flex;gap:4px;background:var(--card);border-radius:24px;padding:4px;margin-top:18px}
+.seg button{flex:1;min-height:44px;border-radius:22px;border:0;background:none;color:var(--mute);font-weight:500;font-size:15px}
+.seg button[aria-pressed=true]{background:var(--leaf);color:var(--bg)}
+.ban{margin-top:14px;border:1px solid var(--tan);border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.5}
+.ban b{font-weight:500;color:var(--tan)}
+.g{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);margin:20px 0 6px;font-weight:500}
+.it{display:flex;align-items:center;gap:12px;min-height:46px;border-bottom:1px solid #2E2819;font-size:16px}
+.it input{width:22px;height:22px;accent-color:var(--leaf);margin:0;flex:none}
+.it input:checked+span{opacity:.55;text-decoration:line-through}
+.it .tag{margin-left:auto;font-size:12px;color:var(--bg);background:var(--tan);border-radius:10px;padding:2px 8px;white-space:nowrap;text-decoration:none!important;opacity:1!important}
+.it .x{margin-left:auto;background:none;border:0;color:var(--mute);min-width:44px;min-height:44px;font-size:22px}
+.add{display:flex;gap:8px;margin-top:20px}
+.add input{flex:1;min-width:0;height:46px;border-radius:23px;border:1px solid var(--brown);background:var(--card);color:var(--ink);padding:0 16px;font-size:16px;font-family:inherit}
+.add button{min-height:46px;padding:0 20px;border-radius:23px;border:0;background:var(--leaf);color:var(--bg);font-weight:500}
+.pbar{height:6px;border-radius:3px;background:var(--bg);margin-top:10px}
+.pbar div{height:100%;border-radius:3px;background:var(--leaf);transition:width .3s}
+.ghost{margin-top:14px;min-height:44px;padding:0 18px;border-radius:22px;border:1px solid var(--brown);background:none;color:var(--mute)}
+.chips{display:flex;gap:8px;margin-top:16px;overflow-x:auto;scrollbar-width:none}
+.ch{min-height:40px;padding:0 16px;border-radius:20px;border:1px solid var(--brown);background:var(--card);color:var(--ink);font-weight:500;font-size:14px;white-space:nowrap}
+.ch[aria-pressed=true]{background:var(--leaf);color:var(--bg);border-color:var(--leaf)}
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.wg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.wc{min-width:0}
+.wg2 .wc{background:var(--card);border-radius:18px;padding:10px}
+.wc img,.wc .ph{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;background:var(--soil);display:block}
+.wc p{margin:0}
+.wn{margin-top:8px!important;font-weight:500;font-size:14px}
+.wl{font-size:12px;font-style:italic;color:var(--mute)}
+.wt{font-size:12px;color:var(--leaf);margin-top:4px!important}
+.cr{font-size:10px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px!important}
+.lnk{background:none;border:0;color:var(--leaf);font-weight:500;min-height:44px;padding:0 4px}
+#map{height:calc(100dvh - 300px);min-height:360px;margin-top:14px;border-radius:20px;overflow:hidden;border:1px solid var(--brown)}
+.leaflet-container{font-family:inherit;background:var(--card)}
+.leaflet-tile-pane{filter:brightness(.82) saturate(.8)}
+.pin{width:16px;height:16px;border-radius:50%;border:3px solid #101912;box-sizing:border-box}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
+<div id="viewToday">
   <div class="top">
     <label class="sb">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
@@ -123,8 +164,61 @@ footer{margin-top:20px;font-size:12px;color:var(--mute);display:flex;justify-con
     <p class="note" style="margin-top:10px">A rule-of-thumb from moon, pressure, wind and rain, not a guarantee.</p>
   </section>
 
+  <section class="card" id="wpre" hidden>
+    <div class="row" style="align-items:baseline"><p class="k" style="margin:0">Seen near you recently</p><button class="lnk" id="wall">See all</button></div>
+    <div class="wg" id="wpg" style="margin-top:12px"></div>
+  </section>
+
   <footer><span id="src">Weather: Open-Meteo</span><span id="upd"></span></footer>
+</div>
+<div id="viewPack" hidden>
+  <h1>Packing</h1>
+  <p class="sub" id="psub"></p>
+  <div class="seg" role="group" aria-label="Activity">
+    <button data-a="fishing" aria-pressed="true">Fishing</button>
+    <button data-a="hiking" aria-pressed="false">Hiking</button>
+    <button data-a="camping" aria-pressed="false">Camping</button>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <div class="row" style="align-items:baseline"><span id="pcount" style="font-weight:500">0 of 0 packed</span><span class="d">Saved on this phone</span></div>
+    <div class="pbar"><div id="pfill" style="width:0"></div></div>
+  </div>
+  <div class="ban" id="pban" hidden></div>
+  <div id="plist"></div>
+  <form class="add" id="padd" autocomplete="off"><input id="pnew" type="text" maxlength="60" placeholder="Add your own item" aria-label="Add your own item"><button type="submit">Add</button></form>
+  <button class="ghost" id="preset">Untick everything</button>
+</div>
+<div id="viewMap" hidden>
+  <h1>Map</h1>
+  <p class="sub" id="msub"></p>
+  <div class="chips" id="mchips" role="group" aria-label="Map layers">
+    <button class="ch" data-l="fishing" aria-pressed="true">Fishing</button>
+    <button class="ch" data-l="camping" aria-pressed="true">Camping</button>
+    <button class="ch" data-l="water" aria-pressed="true">Water</button>
+    <button class="ch" data-l="peaks" aria-pressed="false">Peaks</button>
+    <button class="ch" data-l="trails" aria-pressed="false">Trails</button>
+  </div>
+  <div id="map" role="application" aria-label="Map"></div>
+  <div class="row" style="margin-top:10px;align-items:center;gap:12px"><button class="ghost" id="msearch" style="margin:0">Search this area</button><span class="note" id="mstat"></span></div>
+  <p class="note" style="margin-top:8px">Fishing shows lakes, ponds and mapped fishing spots. Check local rules and permits before you fish. Map data © OpenStreetMap contributors.</p>
+</div>
+<div id="viewWild" hidden>
+  <h1>Wildlife nearby</h1>
+  <p class="sub" id="wsub"></p>
+  <div class="chips" id="wchips" role="group" aria-label="Filter">
+    <button class="ch" aria-pressed="true">All</button><button class="ch" aria-pressed="false">Mammals</button><button class="ch" aria-pressed="false">Birds</button><button class="ch" aria-pressed="false">Fish</button>
+  </div>
+  <div class="wg2" id="wlist"></div>
+  <p class="note" id="wstat" style="margin-top:12px"></p>
+  <p class="note" style="margin-top:8px">Sightings and photos from iNaturalist observers, credited on each photo.</p>
+</div>
 </main>
+<nav class="nav" aria-label="Main">
+  <button class="nb" data-v="today" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/></svg>Today</button>
+  <button class="nb" data-v="map" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>Map</button>
+  <button class="nb" data-v="pack" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>Packing</button>
+  <button class="nb" data-v="wild" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12c4-6 12-6 16 0-4 6-12 6-16 0z"/><path d="M19 12l3-3v6z"/></svg>Wildlife</button>
+</nav>
 
 <div id="scrim" hidden></div>
 <aside id="drawer" role="dialog" aria-modal="true" aria-label="Choose a day" hidden>
@@ -134,6 +228,7 @@ footer{margin-top:20px;font-size:12px;color:var(--mute);display:flex;justify-con
   <button id="here" class="loc">Use my location</button>
 </aside>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const wmo = c => c == 0 ? 'Clear' : c <= 2 ? 'Partly cloudy' : c == 3 ? 'Overcast' : c <= 48 ? 'Fog' : c <= 57 ? 'Drizzle' : c <= 67 ? 'Rain' : c <= 77 ? 'Snow' : c <= 82 ? 'Showers' : c <= 86 ? 'Snow showers' : 'Thunderstorm';
@@ -178,6 +273,8 @@ async function load() {
     data = c.d; note = 'Offline: forecast saved at ' + hm(new Date(c.t));
   }
   day = 0; render();
+  if (map && place.lat + "," + place.lon !== mpk) mapMove();
+  loadWild();
 }
 
 function render() {
@@ -238,10 +335,189 @@ function render() {
   $('#fwin').innerHTML = `<b style="font-weight:500;color:#D9A25C">${hm(w1[0])} – ${hm(w1[1])}</b> around sunrise<br><b style="font-weight:500;color:#86C46F">${hm(w2[0])} – ${hm(w2[1])}</b> around sunset`;
 
   $('#upd').textContent = note || 'Updated ' + c.time.slice(11, 16);
+  renderPack();
 
   // day picker
   $('#days').innerHTML = D.time.map((t, k) => `<button class="day" data-k="${k}" aria-current="${k === i}"><span>${dayName(k)} <small>${new Date(t + 'T12:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}</small></span><span>${Math.round(D.temperature_2m_max[k])}° / ${Math.round(D.temperature_2m_min[k])}°</span><small>${wmo(D.weather_code[k])}</small><small class="r">Rain ${D.precipitation_probability_max[k]}%</small></button>`).join('');
 }
+
+// packing
+const PACK = {
+  fishing: [['Gear','Rod and reel'],['Gear','Tackle box'],['Gear','Landing net'],['Gear','Pliers and line cutters'],['Gear','Fishing permit and ID'],['Clothing','Warm layer'],['Food and water','Water'],['Food and water','Snacks'],['Safety','Phone charged'],['Safety','First-aid kit']],
+  hiking: [['Gear','Backpack'],['Gear','Trekking poles'],['Gear','Offline map'],['Clothing','Hiking boots'],['Clothing','Warm layer'],['Clothing','Spare socks'],['Food and water','Water, 2 litres'],['Food and water','Snacks'],['Safety','First-aid kit'],['Safety','Headlamp'],['Safety','Whistle'],['Safety','Power bank']],
+  camping: [['Shelter','Tent'],['Shelter','Sleeping bag'],['Shelter','Sleeping mat'],['Kitchen','Stove and fuel'],['Kitchen','Lighter'],['Kitchen','Pot and cup'],['Kitchen','Food'],['Food and water','Water'],['Clothing','Warm layer'],['Clothing','Rain jacket'],['Safety','Headlamp'],['Safety','First-aid kit'],['Safety','Power bank'],['Safety','Knife']]
+};
+let act = 'fishing', ps = {};
+try { ps = JSON.parse(localStorage.getItem('pack') || '{}'); } catch {}
+const st = () => (ps[act] = ps[act] || { done: {}, custom: [] });
+const savePack = () => { try { localStorage.setItem('pack', JSON.stringify(ps)); } catch {} };
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+function suggestions(base) {
+  if (!data) return [];
+  const D = data.daily, i = day, out = [];
+  const rain = D.precipitation_probability_max[i], lo = Math.round(D.temperature_2m_min[i]), hi = Math.round(D.temperature_2m_max[i]);
+  const wind = Math.round(D.wind_speed_10m_max[i]), ss = new Date(D.sunset[i]);
+  if (rain >= 40) { out.push(['Rain jacket', 'Rain ' + rain + '%']); if (act !== 'camping') out.push(['Waterproof boots', 'Rain ' + rain + '%']); else out.push(['Tarp or rain cover', 'Rain ' + rain + '%']); }
+  if (lo <= 5) out.push(['Hat and gloves', 'Low ' + lo + '°']);
+  if (lo <= 0 && act === 'camping') out.push(['Winter sleeping bag or liner', 'Low ' + lo + '°']);
+  if (hi >= 24) out.push(['Sun hat and sunscreen', 'High ' + hi + '°'], ['Extra water', 'High ' + hi + '°']);
+  if (wind >= 25) out.push(['Windproof layer', 'Wind ' + wind + ' km/h']);
+  if (ss.getHours() * 60 + ss.getMinutes() < 18 * 60 + 30) out.push(['Headlamp', 'Sunset ' + hm(ss)]);
+  const have = new Set(base.map(x => x[1].toLowerCase())), seen = new Set();
+  return out.filter(x => { const k = x[0].toLowerCase(); if (have.has(k) || seen.has(k)) return false; seen.add(k); return true; });
+}
+
+function renderPack() {
+  const s = st(), base = PACK[act], sug = suggestions(base), groups = {};
+  const put = (cat, t, tag, custom) => (groups[cat] = groups[cat] || []).push({ t, tag, custom });
+  sug.forEach(x => put('From the forecast', x[0], x[1]));
+  base.forEach(x => put(x[0], x[1]));
+  s.custom.forEach(t => put('My items', t, '', true));
+  let total = 0, done = 0;
+  $('#plist').innerHTML = Object.entries(groups).map(([c, items]) => `<p class="g">${esc(c)}</p>` + items.map(it => {
+    const k = it.t.toLowerCase(), on = !!s.done[k]; total++; if (on) done++;
+    return `<label class="it"><input type="checkbox" data-k="${esc(k)}"${on ? ' checked' : ''}><span>${esc(it.t)}</span>` +
+      (it.tag ? `<span class="tag">${esc(it.tag)}</span>` : '') +
+      (it.custom ? `<button type="button" class="x" data-del="${esc(it.t)}" aria-label="Remove ${esc(it.t)}">×</button>` : '') + '</label>';
+  }).join('')).join('');
+  $('#pcount').textContent = `${done} of ${total} packed`;
+  $('#pfill').style.width = total ? (done / total * 100) + '%' : '0';
+  const ban = $('#pban');
+  if (sug.length) {
+    const dn = day === 0 ? 'today' : new Date(data.daily.time[day] + 'T12:00:00').toLocaleDateString(undefined, { weekday: 'long' });
+    ban.innerHTML = `<b>Added from the forecast</b><br>For ${esc(place.name)} ${esc(dn)}: ${esc(sug.map(x => x[0].toLowerCase()).join(', '))}.`; ban.hidden = false;
+  } else ban.hidden = true;
+  $('#psub').textContent = data ? 'Based on the forecast for ' + place.name : 'Waiting for the forecast…';
+}
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
+  act = b.dataset.a; document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderPack();
+});
+$('#plist').addEventListener('change', e => {
+  const k = e.target.dataset && e.target.dataset.k; if (k === undefined) return;
+  const s = st(); if (e.target.checked) s.done[k] = true; else delete s.done[k]; savePack(); renderPack();
+});
+$('#plist').addEventListener('click', e => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  const s = st(), t = b.dataset.del; s.custom = s.custom.filter(x => x !== t); delete s.done[t.toLowerCase()]; savePack(); renderPack();
+});
+$('#padd').addEventListener('submit', e => {
+  e.preventDefault(); const v = $('#pnew').value.trim(), s = st();
+  if (v && !s.custom.some(x => x.toLowerCase() === v.toLowerCase()) && !PACK[act].some(x => x[1].toLowerCase() === v.toLowerCase())) { s.custom.push(v); savePack(); }
+  $('#pnew').value = ''; renderPack();
+});
+$('#preset').onclick = () => { st().done = {}; savePack(); renderPack(); };
+
+
+
+// wildlife (iNaturalist)
+const TAX = { Mammalia: 'Mammal', Aves: 'Bird', Actinopterygii: 'Fish', Reptilia: 'Reptile', Amphibia: 'Amphibian' };
+let wild = null, wkey = '', wfilter = 'All';
+const cap = t => t ? t.charAt(0).toUpperCase() + t.slice(1) : '';
+const wcard = r => {
+  const t = r.taxon, p = t.default_photo, nm = cap(t.preferred_common_name || t.name);
+  return `<div class="wc">${p ? `<img src="${esc(p.medium_url || p.square_url)}" alt="${esc(nm)}" loading="lazy">` : '<div class="ph"></div>'}` +
+    `<p class="wn">${esc(nm)}</p><p class="wl">${esc(t.name)}</p><p class="wt">${esc(TAX[t.iconic_taxon_name] || 'Wildlife')} · ${r.count} sightings</p>` +
+    (p && p.attribution ? `<p class="cr" title="${esc(p.attribution)}">Photo: ${esc(p.attribution)}</p>` : '') + '</div>';
+};
+function renderWild() {
+  const L = Array.isArray(wild) ? wild : [];
+  $('#wsub').textContent = place.name + ' · within 20 km · last 60 days';
+  const g = { Mammals: 'Mammalia', Birds: 'Aves', Fish: 'Actinopterygii' }[wfilter];
+  const items = g ? L.filter(r => r.taxon.iconic_taxon_name === g) : L;
+  $('#wlist').innerHTML = items.map(wcard).join('');
+  $('#wstat').textContent = wild === null ? 'Loading sightings…' : wild === 'error' ? 'Could not load sightings. Check your connection.' : !items.length ? 'No sightings in this group nearby recently.' : '';
+  const pre = $('#wpre');
+  if (L.length) {
+    const pick = [];
+    ['Mammalia', 'Aves', 'Actinopterygii'].forEach(k => { const x = L.find(r => r.taxon.iconic_taxon_name === k); if (x) pick.push(x); });
+    L.forEach(r => { if (pick.length < 3 && !pick.includes(r)) pick.push(r); });
+    $('#wpg').innerHTML = pick.slice(0, 3).map(wcard).join(''); pre.hidden = false;
+  } else pre.hidden = true;
+}
+async function loadWild() {
+  const key = place.lat.toFixed(2) + ',' + place.lon.toFixed(2), ck = 'wl:' + key;
+  if (wkey === key && wild) { renderWild(); return; }
+  wkey = key; wild = null; renderWild();
+  let c = null; try { c = JSON.parse(localStorage.getItem(ck) || 'null'); } catch {}
+  if (c && Date.now() - c.t < 6 * 36e5) { wild = c.d; renderWild(); return; }
+  const d1 = new Date(Date.now() - 60 * 864e5).toISOString().slice(0, 10);
+  try {
+    const r = await fetch(`https://api.inaturalist.org/v1/observations/species_counts?lat=${place.lat}&lng=${place.lon}&radius=20&d1=${d1}&quality_grade=research&iconic_taxa=Mammalia,Aves,Actinopterygii,Reptilia,Amphibia&locale=en&per_page=40`);
+    if (!r.ok) throw 0;
+    wild = (await r.json()).results || [];
+    try { localStorage.setItem(ck, JSON.stringify({ t: Date.now(), d: wild })); } catch {}
+  } catch { wild = c ? c.d : 'error'; }
+  if (wkey === key) renderWild();
+}
+document.querySelectorAll('#wchips button').forEach(b => b.onclick = () => {
+  wfilter = b.textContent; document.querySelectorAll('#wchips button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderWild();
+});
+$('#wall').onclick = () => show('wild');
+
+// map (OpenStreetMap + Leaflet)
+let map = null, mpin = null, mpk = '';
+const mon = { fishing: true, camping: true, water: true, peaks: false, trails: false }, ml = {};
+const COL = { fishing: '#D9A25C', camping: '#86C46F', water: '#6FB3C4', peaks: '#A98A5C' };
+const tip = t => { const d = document.createElement('div'); d.textContent = t; return d; };
+function initMap() {
+  if (map) return;
+  if (!window.L) { $('#mstat').textContent = 'The map library could not load. Check your connection.'; return; }
+  map = L.map('map').setView([place.lat, place.lon], 12); mpk = place.lat + ',' + place.lon;
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '© OpenStreetMap contributors' }).addTo(map);
+  ml.trails = L.tileLayer('https://tile.waymarkedtrails.org/hiking/{z}/{x}/{y}.png', { maxZoom: 18, opacity: .85, attribution: 'Trails © waymarkedtrails.org' });
+  ['fishing', 'camping', 'water', 'peaks'].forEach(k => ml[k] = L.layerGroup());
+  Object.keys(mon).forEach(k => mon[k] && ml[k].addTo(map));
+  mpin = L.circleMarker([place.lat, place.lon], { radius: 7, color: '#101912', weight: 3, fillColor: '#EDE6D6', fillOpacity: 1 }).bindTooltip(tip(place.name)).addTo(map);
+  fetchPois(map.getCenter());
+}
+function mapMove() { mpk = place.lat + ',' + place.lon; map.setView([place.lat, place.lon], 12); mpin.setLatLng([place.lat, place.lon]); mpin.setTooltipContent(tip(place.name)); fetchPois(map.getCenter()); }
+async function fetchPois(c) {
+  const a = `(around:10000,${c.lat.toFixed(4)},${c.lng.toFixed(4)})`;
+  const q = `[out:json][timeout:25];(nwr["leisure"="fishing"]${a};nwr["natural"="water"]["name"]${a};nwr["tourism"="camp_site"]${a};nwr["amenity"="drinking_water"]${a};nwr["natural"="spring"]${a};node["natural"="peak"]["name"]${a};);out center tags 250;`;
+  $('#mstat').textContent = 'Loading places…';
+  try {
+    const r = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', body: 'data=' + encodeURIComponent(q) });
+    if (!r.ok) throw 0;
+    const j = await r.json(); let n = 0;
+    ['fishing', 'camping', 'water', 'peaks'].forEach(k => ml[k].clearLayers());
+    j.elements.forEach(e => {
+      const t = e.tags || {}, la = e.lat ?? (e.center && e.center.lat), lo = e.lon ?? (e.center && e.center.lon);
+      if (la == null) return;
+      let k, type;
+      if (t.tourism === 'camp_site') { k = 'camping'; type = 'Campsite'; }
+      else if (t.amenity === 'drinking_water') { k = 'water'; type = 'Drinking water'; }
+      else if (t.natural === 'spring') { k = 'water'; type = 'Spring'; }
+      else if (t.natural === 'peak') { k = 'peaks'; type = 'Peak' + (t.ele ? ', ' + t.ele + ' m' : ''); }
+      else if (t.leisure === 'fishing') { k = 'fishing'; type = 'Fishing spot'; }
+      else if (t.natural === 'water') { k = 'fishing'; type = 'Lake or pond'; }
+      else return;
+      const pop = document.createElement('div'), b = document.createElement('b'), a2 = document.createElement('a');
+      b.textContent = t.name || type; a2.textContent = 'Directions'; a2.target = '_blank'; a2.rel = 'noopener';
+      a2.href = `https://www.google.com/maps/dir/?api=1&destination=${la},${lo}`;
+      pop.append(b, document.createElement('br'), document.createTextNode(type + ' · '), a2);
+      L.marker([la, lo], { icon: L.divIcon({ className: '', html: `<div class="pin" style="background:${COL[k]}"></div>`, iconSize: [16, 16] }) }).bindPopup(pop).addTo(ml[k]); n++;
+    });
+    $('#mstat').textContent = n + ' places within 10 km of the map centre';
+  } catch { $('#mstat').textContent = 'Could not load places. Try again in a moment.'; }
+}
+document.querySelectorAll('#mchips button').forEach(b => b.onclick = () => {
+  const k = b.dataset.l; mon[k] = !mon[k]; b.setAttribute('aria-pressed', mon[k]);
+  if (map) mon[k] ? ml[k].addTo(map) : map.removeLayer(ml[k]);
+});
+$('#msearch').onclick = () => map && fetchPois(map.getCenter());
+
+// tabs
+const VIEWS = { today: '#viewToday', map: '#viewMap', pack: '#viewPack', wild: '#viewWild' }, HASH = { map: 'map', pack: 'packing', wild: 'wildlife' };
+function show(v) {
+  Object.entries(VIEWS).forEach(([k, sel]) => $(sel).hidden = k !== v);
+  document.querySelectorAll('.nb').forEach(b => b.setAttribute('aria-current', b.dataset.v === v ? 'page' : 'false'));
+  if (v === 'map') { $('#msub').textContent = 'Around ' + place.name; initMap(); if (map) setTimeout(() => map.invalidateSize(), 60); }
+  if (v === 'wild') loadWild();
+  history.replaceState(null, '', v === 'today' ? location.pathname : '#' + HASH[v]); scrollTo(0, 0);
+}
+document.querySelectorAll('.nb').forEach(b => b.onclick = () => show(b.dataset.v));
+{ const h = Object.keys(HASH).find(k => '#' + HASH[k] === location.hash); if (h) show(h); }
 
 // drawer
 const drawer = $('#drawer'), scrim = $('#scrim'), mb = $('#menuBtn');
