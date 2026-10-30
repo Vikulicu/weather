@@ -36,7 +36,7 @@ main{max-width:560px;margin:0 auto;padding:22px 18px 120px}
 .sb input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);font:inherit;font-size:17px}
 .sb:focus-within{box-shadow:inset 0 2px 6px var(--shadow),0 0 0 2px var(--acc)}
 .ib{width:48px;height:48px;border-radius:24px;display:grid;place-items:center;padding:0;flex:none}
-#results{position:absolute;left:0;right:112px;top:54px;z-index:5;margin:0;padding:6px;list-style:none;border-radius:14px;background:var(--card);border:1px solid var(--edge);box-shadow:0 14px 30px var(--shadow)}
+#results{position:absolute;left:58px;right:0;top:54px;z-index:5;margin:0;padding:6px;list-style:none;border-radius:14px;background:var(--card);border:1px solid var(--edge);box-shadow:0 14px 30px var(--shadow)}
 #results li{padding:10px 12px;border-radius:8px;cursor:pointer}
 #results li:hover,#results li:focus{background:var(--soil);outline:none}
 #results small{color:var(--mute)}
@@ -94,7 +94,7 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .it input:checked+span{opacity:.55;text-decoration:line-through}
 .it .tag{margin-left:auto;font:700 12px var(--slab);color:var(--on);background:var(--tan);border-radius:8px;padding:2px 8px;white-space:nowrap;text-decoration:none!important;opacity:1!important}
 .it .x{margin-left:auto;background:none;border:0;color:var(--mute);min-width:44px;min-height:44px;font-size:22px}
-.add{display:flex;gap:8px;margin-top:20px}
+.add{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .add input{flex:1;min-width:0;height:48px;border-radius:24px;border:0;background:var(--well);box-shadow:inset 0 2px 6px var(--shadow),0 1px 0 var(--hi);color:var(--ink);padding:0 16px;font:inherit;font-size:17px}
 .add button{min-height:48px;padding:0 22px;border-radius:24px;border:1px solid color-mix(in srgb,var(--leaf),#000 35%);background:linear-gradient(180deg,color-mix(in srgb,var(--leaf),#fff 18%),var(--leaf));color:var(--on);font:700 15px var(--slab);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 0 color-mix(in srgb,var(--leaf),#000 40%)}
 .pbar{height:10px;border-radius:5px;background:var(--well);box-shadow:inset 0 2px 4px var(--shadow);margin-top:10px;overflow:hidden}
@@ -116,7 +116,7 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .leaflet-container{font-family:inherit;background:var(--card)}
 .leaflet-tile-pane{filter:brightness(.88) saturate(.85) sepia(.15)}
 .pin{width:18px;height:18px;border-radius:50%;border:3px solid var(--card);box-shadow:0 2px 4px var(--shadow)}
-#lbimg{width:100%;max-height:62vh;object-fit:contain;display:block;border:6px solid #F7F2E4;border-radius:3px;box-shadow:0 6px 16px var(--shadow);background:#F7F2E4}
+#lbimg{width:100%;aspect-ratio:4/3;max-height:62vh;object-fit:contain;display:block;border:6px solid #F7F2E4;border-radius:3px;box-shadow:0 6px 16px var(--shadow);background:#F7F2E4}
 #lba p{margin:10px 0 0;line-height:1.45}
 #lba a{color:var(--acc);font-weight:700}
 .cr2{font-size:13px;color:var(--mute)}
@@ -125,6 +125,48 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .sws{display:flex;flex:none;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px var(--edge)}
 .sws i{width:12px;height:30px}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fade{animation:fade .28s ease-out both}
+@keyframes pulse{50%{opacity:.45}}
+.ld .ch{animation:pulse 1s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.fade,.ld .ch{animation:none}}
+.hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.hrow .ib{width:44px;height:44px;margin-bottom:-2px}
+#starBtn[aria-pressed=true] svg{fill:var(--tan);stroke:var(--tan)}
+.pr{display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line)}
+.pgo{flex:1;display:grid;grid-template-columns:1fr auto;gap:0 12px;align-items:center;text-align:left;background:none;border:0;min-height:62px;padding:8px 4px}
+.pgo b{font:700 18px var(--slab)}
+.pgo small{color:var(--mute);font-size:14px}
+.pt{grid-row:1/3;grid-column:2;font:500 28px var(--slab)}
+.it .lab{flex:1;display:flex;align-items:center;gap:12px;min-width:0;min-height:48px}
+.ed,.grip{flex:none;width:44px;height:44px;display:grid;place-items:center;background:none;border:0;color:var(--mute);font:700 24px var(--slab)}
+.grip{cursor:grab;touch-action:none}
+.it.drag{background:var(--soil);border-radius:10px;box-shadow:0 8px 16px var(--shadow);position:relative;z-index:2}
+.add select{flex:1 1 100%;min-height:48px;border-radius:24px;border:0;background:var(--well);box-shadow:inset 0 2px 6px var(--shadow),0 1px 0 var(--hi);color:var(--ink);padding:0 16px;font:inherit;font-size:17px}
+#pnew{flex:1 1 55%}
+#pcatnew,#pecatnew{flex:1 1 100%}
+.pri{min-height:48px;padding:0 22px;border-radius:24px;border:1px solid color-mix(in srgb,var(--leaf),#000 35%);background:linear-gradient(180deg,color-mix(in srgb,var(--leaf),#fff 18%),var(--leaf));color:var(--on);font:700 15px var(--slab);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 0 color-mix(in srgb,var(--leaf),#000 40%)}
+.danger{color:#C9573B!important}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.sc2{background:var(--well);box-shadow:inset 0 2px 6px var(--shadow),0 1px 0 var(--hi);border-radius:12px;padding:10px 8px;text-align:center}
+.sc2 b{display:block;font:700 22px var(--slab)}
+.sc2 span{font-size:13px;color:var(--mute)}
+.le{padding:14px}
+.lph{display:flex;gap:8px;flex-wrap:wrap}
+.pbtn{background:none;border:0;padding:0;display:block;flex:1 1 100%}
+.pbtn+.pbtn{flex:0 0 calc(33.333% - 6px)}
+.pr{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:4px solid #F7F2E4;border-radius:3px;box-shadow:0 3px 8px var(--shadow);background:var(--soil)}
+.lbody{display:block;width:100%;text-align:left;background:none;border:0;padding:12px 0 0;color:inherit}
+.lbody span{display:block}
+.ln{margin-top:6px;font-size:16px;line-height:1.4}
+.empty{margin:28px 0;text-align:center;color:var(--mute)}
+.add textarea{flex:1 1 100%;min-height:90px;border-radius:18px;border:0;background:var(--well);box-shadow:inset 0 2px 6px var(--shadow),0 1px 0 var(--hi);color:var(--ink);padding:12px 16px;font:inherit;font-size:17px;resize:vertical}
+.lgp{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.pv1{position:relative;width:calc(33.333% - 7px)}
+.pv1 img{width:100%;aspect-ratio:1;object-fit:cover;display:block;border:3px solid #F7F2E4;border-radius:3px}
+.pv1 button{position:absolute;top:-8px;right:-8px;width:32px;height:32px;border-radius:16px;border:1px solid var(--edge);background:var(--card);color:var(--ink);font-size:18px;line-height:1}
+.pvs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-top:12px}
+.pvs img{flex:0 0 100%;width:100%;scroll-snap-align:center;max-height:70vh;object-fit:contain;display:block;border:6px solid #F7F2E4;border-radius:3px;background:#F7F2E4;box-shadow:0 6px 16px var(--shadow)}
 [hidden]{display:none!important}
 </style>
 
@@ -133,9 +175,10 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 <main>
 <div id="viewToday">
   <div class="top">
+    <button id="plBtn" class="ib" aria-label="Saved places"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></button>
     <label class="sb">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-      <input id="q" type="search" placeholder="Search a city or place" aria-label="Search a city or place" autocomplete="off">
+      <input id="q" type="search" placeholder="Search a city" aria-label="Search a city or place" autocomplete="off">
     </label>
     <button id="gearBtn" class="ib" aria-label="Settings"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button>
     <button id="menuBtn" class="ib" aria-label="Open menu: choose a day" aria-expanded="false" aria-controls="drawer">
@@ -144,7 +187,7 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
     <ul id="results" hidden></ul>
   </div>
 
-  <h1 id="place">&nbsp;</h1>
+  <div class="hrow"><h1 id="place">&nbsp;</h1><button id="starBtn" class="ib" aria-pressed="false" aria-label="Save this place"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg></button></div>
   <p class="sub" id="dayline"></p>
 
   <section class="card" aria-live="polite">
@@ -205,8 +248,8 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
     <div class="pbar"><div id="pfill" style="width:0"></div></div>
   </div>
   <div id="plist"></div>
-  <form class="add" id="padd" autocomplete="off"><input id="pnew" type="text" maxlength="60" placeholder="Add your own item" aria-label="Add your own item"><button type="submit">Add</button></form>
-  <button class="ghost" id="preset">Untick everything</button>
+  <form class="add" id="padd" autocomplete="off"><input id="pnew" type="text" maxlength="60" placeholder="Add an item" aria-label="Add an item"><button type="submit" class="pri">Add</button><select id="pcatsel" aria-label="Category"></select><input id="pcatnew" type="text" maxlength="30" placeholder="New category name" aria-label="New category name" hidden></form>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" id="preset">Untick all</button><button class="ghost" id="prestore">Restore defaults</button></div>
 </div>
 <div id="viewMap" hidden>
   <h1>Map</h1>
@@ -230,18 +273,30 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
   <div class="wg2" id="wlist"></div>
   <p class="note" id="wstat" style="margin-top:12px"></p>
 </div>
+<div id="viewLog" hidden>
+  <h1>Log</h1>
+  <div class="stats" id="lgstats"></div>
+  <button class="pri" id="lgnew" style="width:100%;margin-top:16px">New entry</button>
+  <p class="note" id="lgerr" style="margin-top:10px" hidden>Entries can’t be saved in this browser. Private windows block it.</p>
+  <div id="lglist"></div>
+</div>
 </main>
 <nav class="nav" aria-label="Main">
   <button class="nb" data-v="today" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/></svg>Today</button>
   <button class="nb" data-v="map" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>Map</button>
   <button class="nb" data-v="pack" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>Packing</button>
   <button class="nb" data-v="wild" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12c4-6 12-6 16 0-4 6-12 6-16 0z"/><path d="M19 12l3-3v6z"/></svg>Wildlife</button>
+  <button class="nb" data-v="log" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M6 3v18M10 8h5M10 12h5"/></svg>Log</button>
 </nav>
 
 <dialog id="settings" aria-label="Settings"><div class="dlg">
   <div class="dh"><h2>Settings</h2><button id="stx" class="ib" aria-label="Close settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <p class="k" style="margin:18px 0 10px">Theme</p>
   <div class="thg" id="thg"></div>
+  <p class="k" style="margin:22px 0 10px">Log backup</p>
+  <div style="display:flex;gap:10px"><button class="ghost" id="lgex" style="margin:0;flex:1">Export</button><button class="ghost" id="lgim" style="margin:0;flex:1">Import</button></div>
+  <input type="file" id="lgfile" accept="application/json,.json" hidden>
+  <p class="note" id="lgnote" style="margin-top:10px"></p>
 </div></dialog>
 <dialog id="lb" aria-label="Photo"><div class="dlg">
   <div class="dh"><div class="chips" style="margin:0;padding:0" role="group" aria-label="View"><button class="ch" id="lbt1" aria-pressed="true">Photo</button><button class="ch" id="lbt2" aria-pressed="false">About</button></div>
@@ -249,6 +304,36 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
   <h2 id="lbt" style="margin-top:14px"></h2>
   <div id="lbp" style="margin-top:12px"><img id="lbimg" alt=""></div>
   <div id="lba" hidden></div>
+</div></dialog>
+<dialog id="places" aria-label="Saved places"><div class="dlg">
+  <div class="dh"><h2>Saved places</h2><button id="plx" class="ib" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div id="pl" style="margin-top:10px"></div>
+</div></dialog>
+<dialog id="pedit" aria-label="Edit item"><div class="dlg">
+  <div class="dh"><h2>Edit item</h2><button id="pex" class="ib" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <p class="k" style="margin:16px 0 8px">Name</p>
+  <div class="add" style="margin:0"><input id="pen" type="text" maxlength="60" aria-label="Item name" style="flex:1 1 100%"></div>
+  <p class="k" style="margin:16px 0 8px">Category</p>
+  <div class="add" style="margin:0"><select id="pecat" aria-label="Category"></select><input id="pecatnew" type="text" maxlength="30" placeholder="New category name" aria-label="New category name" hidden></div>
+  <div style="display:flex;gap:10px;margin-top:20px"><button class="ghost danger" id="pedel" style="margin:0;flex:1">Delete</button><button class="pri" id="pesave" style="flex:1">Save</button></div>
+</div></dialog>
+<dialog id="lgd" aria-label="Log entry"><div class="dlg">
+  <div class="dh"><h2 id="lgt">New entry</h2><button id="lgx" class="ib" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="lgp" id="lgpre"></div>
+  <button type="button" class="ghost" id="lgadd" style="width:100%;margin-top:12px">Add photos</button>
+  <input type="file" id="lgph" accept="image/*" multiple hidden>
+  <p class="k" style="margin:16px 0 8px">Catch</p>
+  <div class="add" style="margin:0"><input id="lgsp1" list="lgsp" type="text" maxlength="40" placeholder="Species" aria-label="Species" style="flex:1 1 100%"><input id="lgl" type="number" inputmode="decimal" min="0" step="0.1" placeholder="Length (cm)" aria-label="Length in centimetres"><input id="lgw" type="number" inputmode="decimal" min="0" step="0.01" placeholder="Weight (kg)" aria-label="Weight in kilograms"><input id="lgbt1" list="lgbt" type="text" maxlength="40" placeholder="Bait or lure" aria-label="Bait or lure" style="flex:1 1 100%"></div>
+  <datalist id="lgsp"></datalist><datalist id="lgbt"></datalist>
+  <p class="k" style="margin:16px 0 8px">Where and when</p>
+  <div class="add" style="margin:0"><input id="lgpl" type="text" maxlength="60" placeholder="Place" aria-label="Place" style="flex:1 1 100%"><input id="lgdt" type="datetime-local" aria-label="Date and time" style="flex:1 1 100%"></div>
+  <p class="k" style="margin:16px 0 8px">Notes</p>
+  <div class="add" style="margin:0"><textarea id="lgnt" maxlength="600" aria-label="Notes"></textarea></div>
+  <div style="display:flex;gap:10px;margin-top:20px"><button class="ghost danger" id="lgdel" style="margin:0;flex:1" hidden>Delete</button><button class="pri" id="lgsave" style="flex:1">Save</button></div>
+</div></dialog>
+<dialog id="pv" aria-label="Photos"><div class="dlg">
+  <div class="dh"><span id="pvc" class="wl"></span><button id="pvx" class="ib" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="pvs" id="pvs"></div>
 </div></dialog>
 <div id="scrim" hidden></div>
 <aside id="drawer" role="dialog" aria-modal="true" aria-label="Choose a day" hidden>
@@ -286,6 +371,7 @@ function moon(ds) {
 
 async function load() {
   $('#place').textContent = [place.name, place.region].filter(Boolean).join(', ');
+  updateStar();
   const key = 'wx:' + place.lat.toFixed(2) + ',' + place.lon.toFixed(2);
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${place.lat}&longitude=${place.lon}&timezone=auto&forecast_days=7&wind_speed_unit=kmh` +
     `&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,pressure_msl,cloud_cover` +
@@ -378,63 +464,129 @@ const PACK = {
   hiking: [['Gear','Backpack'],['Gear','Trekking poles'],['Gear','Offline map'],['Clothing','Hiking boots'],['Clothing','Warm layer'],['Clothing','Spare socks'],['Food and water','Water, 2 litres'],['Food and water','Snacks'],['Safety','First-aid kit'],['Safety','Headlamp'],['Safety','Whistle'],['Safety','Power bank']],
   camping: [['Shelter','Tent'],['Shelter','Sleeping bag'],['Shelter','Sleeping mat'],['Kitchen','Stove and fuel'],['Kitchen','Lighter'],['Kitchen','Pot and cup'],['Kitchen','Food'],['Food and water','Water'],['Clothing','Warm layer'],['Clothing','Rain jacket'],['Safety','Headlamp'],['Safety','First-aid kit'],['Safety','Power bank'],['Safety','Knife']]
 };
-let act = 'fishing', ps = {};
+let act = 'fishing', ps = {}, curSug = [], selCat = null, editing = -1, drag = null;
 try { ps = JSON.parse(localStorage.getItem('pack') || '{}'); } catch {}
-const st = () => (ps[act] = ps[act] || { done: {}, custom: [] });
-const savePack = () => { try { localStorage.setItem('pack', JSON.stringify(ps)); } catch {} };
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
-function suggestions(base) {
+const savePack = () => { try { localStorage.setItem('pack', JSON.stringify(ps)); } catch {} };
+const PEN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>';
+const GRIP = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 8h14M5 12h14M5 16h14"/></svg>';
+function st() {
+  let s = ps[act];
+  if (!s) s = ps[act] = { done: {}, custom: [] };
+  if (!s.items) { // first run, or upgrade from the older list format
+    s.items = PACK[act].map(x => ({ t: x[1], c: x[0] })).concat((s.custom || []).map(t => ({ t, c: 'My items' })));
+    delete s.custom; savePack();
+  }
+  return s;
+}
+function catOpts(s, cur) {
+  const c = [...new Set(s.items.map(i => i.c))]; if (!c.length) c.push('My items'); if (cur && !c.includes(cur)) c.push(cur);
+  return c.map(x => `<option value="${esc(x)}"${x === cur ? ' selected' : ''}>${esc(x)}</option>`).join('') + '<option value="__new">New category…</option>';
+}
+function suggestions(s) {
   if (!data) return [];
-  const D = data.daily, i = day, out = [];
-  const rain = D.precipitation_probability_max[i], lo = Math.round(D.temperature_2m_min[i]), hi = Math.round(D.temperature_2m_max[i]);
-  const wind = Math.round(D.wind_speed_10m_max[i]), ss = new Date(D.sunset[i]);
-  if (rain >= 40) { out.push(['Rain jacket', 'Rain ' + rain + '%']); if (act !== 'camping') out.push(['Waterproof boots', 'Rain ' + rain + '%']); else out.push(['Tarp or rain cover', 'Rain ' + rain + '%']); }
-  if (lo <= 5) out.push(['Hat and gloves', 'Low ' + lo + '°']);
-  if (lo <= 0 && act === 'camping') out.push(['Winter sleeping bag or liner', 'Low ' + lo + '°']);
-  if (hi >= 24) out.push(['Sun hat and sunscreen', 'High ' + hi + '°'], ['Extra water', 'High ' + hi + '°']);
-  if (wind >= 25) out.push(['Windproof layer', 'Wind ' + wind + ' km/h']);
-  if (ss.getHours() * 60 + ss.getMinutes() < 18 * 60 + 30) out.push(['Headlamp', 'Sunset ' + hm(ss)]);
-  const have = new Set(base.map(x => x[1].toLowerCase())), seen = new Set();
+  const D = data.daily, i = day, out = [], P = (t, tag, c) => out.push([t, tag, c]);
+  const rain = D.precipitation_probability_max[i], lo = Math.round(D.temperature_2m_min[i]), hi = Math.round(D.temperature_2m_max[i]), wind = Math.round(D.wind_speed_10m_max[i]), ss = new Date(D.sunset[i]);
+  if (rain >= 40) { P('Rain jacket', 'Rain ' + rain + '%', 'Clothing'); if (act === 'camping') P('Tarp or rain cover', 'Rain ' + rain + '%', 'Shelter'); else P('Waterproof boots', 'Rain ' + rain + '%', 'Clothing'); }
+  if (lo <= 5) P('Hat and gloves', 'Low ' + lo + '°', 'Clothing');
+  if (lo <= 0 && act === 'camping') P('Winter sleeping bag or liner', 'Low ' + lo + '°', 'Shelter');
+  if (hi >= 24) { P('Sun hat and sunscreen', 'High ' + hi + '°', 'Clothing'); P('Extra water', 'High ' + hi + '°', 'Food and water'); }
+  if (wind >= 25) P('Windproof layer', 'Wind ' + wind + ' km/h', 'Clothing');
+  if (ss.getHours() * 60 + ss.getMinutes() < 18 * 60 + 30) P('Headlamp', 'Sunset ' + hm(ss), 'Safety');
+  const have = new Set(s.items.map(x => x.t.toLowerCase())), seen = new Set();
   return out.filter(x => { const k = x[0].toLowerCase(); if (have.has(k) || seen.has(k)) return false; seen.add(k); return true; });
 }
-
 function renderPack() {
-  const s = st(), base = PACK[act], sug = suggestions(base), groups = {};
-  const put = (cat, t, tag, custom) => (groups[cat] = groups[cat] || []).push({ t, tag, custom });
-  sug.forEach(x => put('From the forecast', x[0], x[1]));
-  base.forEach(x => put(x[0], x[1]));
-  s.custom.forEach(t => put('My items', t, '', true));
-  let total = 0, done = 0;
-  $('#plist').innerHTML = Object.entries(groups).map(([c, items]) => `<p class="g">${esc(c)}</p>` + items.map(it => {
+  const s = st(), sug = suggestions(s), cs = [...new Set(s.items.map(i => i.c))];
+  let total = 0, done = 0, h = ''; curSug = sug;
+  const row = (it, i, fc) => {
     const k = it.t.toLowerCase(), on = !!s.done[k]; total++; if (on) done++;
-    return `<label class="it"><input type="checkbox" data-k="${esc(k)}"${on ? ' checked' : ''}><span>${esc(it.t)}</span>` +
-      (it.tag ? `<span class="tag">${esc(it.tag)}</span>` : '') +
-      (it.custom ? `<button type="button" class="x" data-del="${esc(it.t)}" aria-label="Remove ${esc(it.t)}">×</button>` : '') + '</label>';
-  }).join('')).join('');
+    return `<div class="it" ${fc ? 'data-fc="1"' : `data-i="${i}"`}><label class="lab"><input type="checkbox" data-k="${esc(k)}"${on ? ' checked' : ''}><span>${esc(it.t)}</span>${it.tag ? `<span class="tag">${esc(it.tag)}</span>` : ''}</label>` +
+      (fc ? `<button type="button" class="ed" data-add="${i}" aria-label="Add ${esc(it.t)} to the list">+</button>`
+          : `<button type="button" class="ed" data-ed="${i}" aria-label="Edit ${esc(it.t)}">${PEN}</button><button type="button" class="grip" data-i="${i}" aria-label="Move ${esc(it.t)}">${GRIP}</button>`) + '</div>';
+  };
+  if (sug.length) h += '<p class="g" data-fc="1">From the forecast</p>' + sug.map((x, n) => row({ t: x[0], tag: x[1], c: x[2] }, n, true)).join('');
+  cs.forEach(c => { h += `<p class="g" data-c="${esc(c)}">${esc(c)}</p>` + s.items.map((it, i) => it.c === c ? row(it, i) : '').join(''); });
+  $('#plist').innerHTML = h;
   $('#pcount').textContent = `${done} of ${total} packed`;
   $('#pfill').style.width = total ? (done / total * 100) + '%' : '0';
+  const sel = $('#pcatsel'); sel.innerHTML = catOpts(s, selCat && selCat !== '__new' ? selCat : null); if (selCat === '__new') sel.value = '__new';
+  $('#pcatnew').hidden = sel.value !== '__new';
   $('#psub').textContent = data ? 'Based on the forecast for ' + place.name : 'Waiting for the forecast…';
 }
 document.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
-  act = b.dataset.a; document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderPack();
+  act = b.dataset.a; selCat = null; document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderPack();
 });
 $('#plist').addEventListener('change', e => {
   const k = e.target.dataset && e.target.dataset.k; if (k === undefined) return;
   const s = st(); if (e.target.checked) s.done[k] = true; else delete s.done[k]; savePack(); renderPack();
 });
 $('#plist').addEventListener('click', e => {
-  const b = e.target.closest('[data-del]'); if (!b) return;
-  const s = st(), t = b.dataset.del; s.custom = s.custom.filter(x => x !== t); delete s.done[t.toLowerCase()]; savePack(); renderPack();
+  const ed = e.target.closest('[data-ed]'), ad = e.target.closest('[data-add]');
+  if (ed) openEdit(+ed.dataset.ed);
+  if (ad) { const x = curSug[+ad.dataset.add], s = st(); if (x && !s.items.some(i => i.t.toLowerCase() === x[0].toLowerCase())) { s.items.push({ t: x[0], c: x[2] }); savePack(); renderPack(); } }
 });
+$('#pcatsel').onchange = e => { selCat = e.target.value; $('#pcatnew').hidden = selCat !== '__new'; };
 $('#padd').addEventListener('submit', e => {
-  e.preventDefault(); const v = $('#pnew').value.trim(), s = st();
-  if (v && !s.custom.some(x => x.toLowerCase() === v.toLowerCase()) && !PACK[act].some(x => x[1].toLowerCase() === v.toLowerCase())) { s.custom.push(v); savePack(); }
-  $('#pnew').value = ''; renderPack();
+  e.preventDefault(); const s = st(), v = $('#pnew').value.trim(); if (!v) return;
+  let c = $('#pcatsel').value; if (c === '__new') c = $('#pcatnew').value.trim() || 'My items';
+  if (!s.items.some(x => x.t.toLowerCase() === v.toLowerCase())) { s.items.push({ t: v, c }); savePack(); }
+  $('#pnew').value = ''; $('#pcatnew').value = ''; selCat = c; renderPack();
 });
 $('#preset').onclick = () => { st().done = {}; savePack(); renderPack(); };
+$('#prestore').onclick = () => { const s = st(); PACK[act].forEach(x => { if (!s.items.some(i => i.t.toLowerCase() === x[1].toLowerCase())) s.items.push({ t: x[1], c: x[0] }); }); savePack(); renderPack(); };
 
+// edit an item: rename, change category, delete
+function openEdit(i) {
+  const s = st(), it = s.items[i]; if (!it) return; editing = i;
+  $('#pen').value = it.t; $('#pecat').innerHTML = catOpts(s, it.c); $('#pecatnew').hidden = true; $('#pecatnew').value = ''; openDlg($('#pedit'));
+}
+$('#pecat').onchange = () => { $('#pecatnew').hidden = $('#pecat').value !== '__new'; };
+$('#pesave').onclick = () => {
+  const s = st(), it = s.items[editing]; if (!it) return;
+  const t = $('#pen').value.trim() || it.t; let c = $('#pecat').value; if (c === '__new') c = $('#pecatnew').value.trim() || it.c;
+  const ok = it.t.toLowerCase(), nk = t.toLowerCase();
+  if (nk !== ok) { if (s.items.some((x, j) => j !== editing && x.t.toLowerCase() === nk)) return; if (s.done[ok]) { delete s.done[ok]; s.done[nk] = true; } }
+  it.t = t; it.c = c; savePack(); closeDlg($('#pedit')); renderPack();
+};
+$('#pedel').onclick = () => { const s = st(), it = s.items[editing]; if (!it) return; delete s.done[it.t.toLowerCase()]; s.items.splice(editing, 1); savePack(); closeDlg($('#pedit')); renderPack(); };
+$('#pex').onclick = () => closeDlg($('#pedit'));
 
+// drag the handle at the end of a row to reorder, or to move it into another category
+function commitOrder() {
+  const s = st(), out = []; let cat = null;
+  [...$('#plist').children].forEach(el => {
+    if (el.classList.contains('g')) cat = el.dataset.fc ? null : el.dataset.c;
+    else if (cat !== null && el.dataset.i !== undefined && el.dataset.fc === undefined) { const it = s.items[+el.dataset.i]; it.c = cat; out.push(it); }
+  });
+  if (out.length === s.items.length) { s.items = out; savePack(); }
+  renderPack();
+}
+function dragMove(e) {
+  if (!drag) return;
+  const y = e.clientY; if (y < 90) scrollBy(0, -12); else if (y > innerHeight - 140) scrollBy(0, 12);
+  const el = document.elementFromPoint(e.clientX, y); if (!el) return;
+  const over = el.closest('#plist .it[data-i], #plist .g[data-c]'); if (!over || over === drag) return;
+  if (over.classList.contains('g')) over.after(drag);
+  else { const r = over.getBoundingClientRect(); if (y < r.top + r.height / 2) over.before(drag); else over.after(drag); }
+}
+function dragEnd() {
+  if (!drag) return; drag.classList.remove('drag'); drag = null;
+  removeEventListener('pointermove', dragMove); removeEventListener('pointerup', dragEnd); removeEventListener('pointercancel', dragEnd); commitOrder();
+}
+$('#plist').addEventListener('pointerdown', e => {
+  const g = e.target.closest('.grip'); if (!g) return;
+  e.preventDefault(); drag = g.closest('.it'); drag.classList.add('drag');
+  addEventListener('pointermove', dragMove); addEventListener('pointerup', dragEnd); addEventListener('pointercancel', dragEnd);
+});
+$('#plist').addEventListener('keydown', e => {
+  const g = e.target.closest('.grip'); if (!g || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
+  e.preventDefault(); const s = st(), i = +g.dataset.i, d = e.key === 'ArrowUp' ? -1 : 1; let j = i + d;
+  while (s.items[j] && s.items[j].c !== s.items[i].c) j += d;
+  if (!s.items[j]) return;
+  [s.items[i], s.items[j]] = [s.items[j], s.items[i]]; savePack(); renderPack();
+  const ng = $('#plist').querySelector(`.grip[data-i="${j}"]`); if (ng) ng.focus();
+});
 
 // wildlife (iNaturalist)
 const TAX = { Mammalia: 'Mammal', Aves: 'Bird', Actinopterygii: 'Fish', Reptilia: 'Reptile', Amphibia: 'Amphibian' };
@@ -497,10 +649,11 @@ function initMap() {
   loadCats();
 }
 function mapMove() { mpk = place.lat + ',' + place.lon; map.setView([place.lat, place.lon], 12); mpin.setLatLng([place.lat, place.lon]); mpin.setTooltipContent(tip(place.name)); loadCats(); }
-const OVP = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://overpass.private.coffee/api/interpreter'];
-const SEL = { fishing: ['nwr["leisure"="fishing"]', 'nwr["natural"="water"]["name"]'], camping: ['nwr["tourism"="camp_site"]', 'nwr["tourism"~"alpine_hut|wilderness_hut"]'],
-  water: ['nwr["amenity"="drinking_water"]', 'nwr["natural"="spring"]'], peaks: ['node["natural"="peak"]["name"]'] };
-function setChip(k, n) { const b = document.querySelector(`#mchips [data-l="${k}"]`); if (b) b.textContent = MN[k] + (n == null ? '' : ' · ' + n); }
+const OVP = ['https://overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
+const QS = ['nwr["leisure"="fishing"]', 'nwr["natural"="water"]["name"]["water"!~"river|stream|canal|stream_pool"]', 'nwr["tourism"="camp_site"]', 'nwr["tourism"~"alpine_hut|wilderness_hut"]',
+  'nwr["amenity"="drinking_water"]', 'nwr["natural"="spring"]', 'node["natural"="peak"]["name"]'];
+let mels = [], mbusy = false;
+function setChip(k, n) { const b = document.querySelector(`#mchips [data-l="${k}"]`); if (b) b.textContent = MN[k] + (n ? ' · ' + n : ''); }
 function kindOf(t) {
   if (t.tourism === 'camp_site') return ['camping', 'Campsite'];
   if (t.tourism === 'alpine_hut' || t.tourism === 'wilderness_hut') return ['camping', 'Mountain hut'];
@@ -511,40 +664,46 @@ function kindOf(t) {
   if (t.natural === 'water') return ['fishing', 'Lake or pond'];
   return null;
 }
-function drawCat(k, els) {
-  ml[k].clearLayers(); let n = 0;
-  els.forEach(e => {
+function drawAll() {
+  const cnt = {}; Object.keys(MN).forEach(k => { ml[k].clearLayers(); cnt[k] = 0; });
+  mels.forEach(e => {
     const t = e.tags || {}, la = e.lat ?? (e.center && e.center.lat), lo = e.lon ?? (e.center && e.center.lon), kt = kindOf(t);
-    if (la == null || !kt || kt[0] !== k) return;
-    const pop = document.createElement('div'), b = document.createElement('b'), a2 = document.createElement('a');
+    if (la == null || !kt) return;
+    const k = kt[0], pop = document.createElement('div'), b = document.createElement('b'), a2 = document.createElement('a');
     b.textContent = t.name || kt[1]; a2.textContent = 'Directions'; a2.target = '_blank'; a2.rel = 'noopener';
     a2.href = `https://www.google.com/maps/dir/?api=1&destination=${la},${lo}`;
     pop.append(b, document.createElement('br'), document.createTextNode(kt[1] + ' · '), a2);
-    L.marker([la, lo], { icon: L.divIcon({ className: '', html: `<div class="pin" style="background:${COL[k]}"></div>`, iconSize: [18, 18] }) }).bindPopup(pop).addTo(ml[k]); n++;
+    L.marker([la, lo], { icon: L.divIcon({ className: '', html: `<div class="pin" style="background:${COL[k]}"></div>`, iconSize: [18, 18] }) }).bindPopup(pop).addTo(ml[k]); cnt[k]++;
   });
-  setChip(k, n);
+  Object.keys(MN).forEach(k => setChip(k, cnt[k]));
 }
-async function fetchCat(k) {
-  const c = map.getCenter(), key = k + c.lat.toFixed(2) + ',' + c.lng.toFixed(2);
-  if (!pc[key]) {
-    setChip(k, '…');
-    const a = `(around:8000,${c.lat.toFixed(4)},${c.lng.toFixed(4)})`, q = `[out:json][timeout:15];(${SEL[k].map(x => x + a + ';').join('')});out center tags 120;`;
-    let j = null;
-    for (const u of OVP) {
-      const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 10000);
-      try { const r = await fetch(u, { method: 'POST', body: 'data=' + encodeURIComponent(q), signal: ctl.signal }); if (r.ok) { j = await r.json(); clearTimeout(t); break; } } catch {}
-      clearTimeout(t);
-    }
-    if (!j) { setChip(k, '!'); return; }
-    pc[key] = j.elements || [];
+// One request for everything (the public servers allow only a couple at a time), cached on the phone
+async function loadCats() {
+  if (!map) return;
+  const c = map.getCenter(), key = 'ov:' + c.lat.toFixed(2) + ',' + c.lng.toFixed(2);
+  let cached = null; try { cached = JSON.parse(localStorage.getItem(key) || 'null'); } catch {}
+  if (cached && Date.now() - cached.t < 7 * 864e5) { mels = cached.d; drawAll(); $('#mstat').textContent = ''; return; }
+  if (mbusy) return;
+  mbusy = true; $('#mchips').classList.add('ld'); $('#mstat').textContent = 'Loading places…';
+  const a = `(around:8000,${c.lat.toFixed(4)},${c.lng.toFixed(4)})`, q = `[out:json][timeout:25];(${QS.map(x => x + a + ';').join('')});out center tags 300;`;
+  let j = null, why = 'no answer';
+  for (const u of OVP) {
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 20000);
+    try {
+      const r = await fetch(u, { method: 'POST', body: new URLSearchParams({ data: q }), signal: ctl.signal });
+      if (r.ok) { const x = await r.json(); if (x && Array.isArray(x.elements) && !(x.remark && !x.elements.length)) { j = x; clearTimeout(t); break; } why = 'server overloaded'; }
+      else why = 'server error ' + r.status;
+    } catch (err) { why = err && err.name === 'AbortError' ? 'too slow' : 'blocked or offline'; }
+    clearTimeout(t);
   }
-  drawCat(k, pc[key]);
+  mbusy = false; $('#mchips').classList.remove('ld');
+  if (!j) { $('#mstat').textContent = 'Map data is not responding (' + why + '). Tap Search this area to try again.'; return; }
+  mels = j.elements; try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: mels })); } catch {}
+  drawAll(); $('#mstat').textContent = mels.length ? '' : 'No places found around here.';
 }
-function loadCats() { Object.keys(MN).forEach(k => mon[k] ? fetchCat(k) : setChip(k, null)); }
 document.querySelectorAll('#mchips button').forEach(b => b.onclick = () => {
   const k = b.dataset.l; mon[k] = !mon[k]; b.setAttribute('aria-pressed', mon[k]);
-  if (!map) return;
-  if (mon[k]) { ml[k].addTo(map); if (k !== 'trails') fetchCat(k); } else map.removeLayer(ml[k]);
+  if (map) mon[k] ? ml[k].addTo(map) : map.removeLayer(ml[k]);
 });
 $('#msearch').onclick = () => map && loadCats();
 
@@ -562,18 +721,21 @@ function applyTheme() {
 $('#thg').innerHTML = TH.map(([id, n, a, b, c]) => `<button class="th" data-t="${id}" aria-pressed="false"><span class="sws"><i style="background:${a}"></i><i style="background:${b}"></i><i style="background:${c}"></i></span>${n}</button>`).join('');
 $('#thg').addEventListener('click', e => { const b = e.target.closest('.th'); if (!b) return; theme = b.dataset.t; try { localStorage.setItem('theme', theme); } catch {} applyTheme(); });
 try { matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => theme === 'auto' && applyTheme()); } catch {}
-const openDlg = d => d.showModal ? d.showModal() : d.setAttribute('open', '');
-$('#gearBtn').onclick = () => openDlg($('#settings')); $('#stx').onclick = () => $('#settings').close();
-document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
+const closeDlg = d => { if (d.close) d.close(); else d.removeAttribute('open'); };
+const openDlg = d => { if (d.hasAttribute('open')) return; if (d.showModal) d.showModal(); else d.setAttribute('open', ''); };
+$('#gearBtn').onclick = () => openDlg($('#settings')); $('#stx').onclick = () => closeDlg($('#settings'));
+document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) closeDlg(d); }));
 applyTheme();
 
 // photo viewer with About tab
 function lbTab(t) { $('#lbp').hidden = t !== 'photo'; $('#lba').hidden = t !== 'about'; $('#lbt1').setAttribute('aria-pressed', t === 'photo'); $('#lbt2').setAttribute('aria-pressed', t === 'about'); }
-$('#lbt1').onclick = () => lbTab('photo'); $('#lbt2').onclick = () => lbTab('about'); $('#lbx').onclick = () => $('#lb').close();
+$('#lbt1').onclick = () => lbTab('photo'); $('#lbt2').onclick = () => lbTab('about'); $('#lbx').onclick = () => closeDlg($('#lb'));
 function openLB(id) {
   const r = (Array.isArray(wild) ? wild : []).find(x => x.taxon.id == id); if (!r) return;
   const t = r.taxon, p = t.default_photo, nm = cap(t.preferred_common_name || t.name), box = $('#lba');
-  $('#lbimg').src = p ? (p.medium_url || '').replace('/medium.', '/large.') : ''; $('#lbimg').alt = nm; $('#lbt').textContent = nm;
+  const im = $('#lbimg'), med = p ? (p.medium_url || p.square_url || '') : '';
+  im.onerror = () => { if (med && im.getAttribute('src') !== med) im.src = med; };
+  im.src = med.replace('/medium.', '/large.'); im.alt = nm; $('#lbt').textContent = nm;
   box.replaceChildren();
   const add = (tag, txt, cls) => { const e = document.createElement(tag); e.textContent = txt; if (cls) e.className = cls; box.append(e); return e; };
   add('p', t.name, 'wl'); add('p', `${TAX[t.iconic_taxon_name] || 'Wildlife'} · seen ${r.count} times nearby`, 'wt');
@@ -590,13 +752,156 @@ function openLB(id) {
 }
 document.addEventListener('click', e => { const c = e.target.closest('.wc[data-id]'); if (c) openLB(c.dataset.id); });
 
+// fade between screens
+function fadeIn(el) { el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade'); }
+
+// saved places, like a phone weather app
+let saved = []; try { saved = JSON.parse(localStorage.getItem('places') || '[]'); } catch {}
+const near = (a, b) => Math.abs(a.lat - b.lat) < .02 && Math.abs(a.lon - b.lon) < .02;
+const savePlaces = () => { try { localStorage.setItem('places', JSON.stringify(saved)); } catch {} };
+function updateStar() { const on = saved.some(x => near(x, place)), b = $('#starBtn'); b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Remove from saved places' : 'Save this place'); }
+$('#starBtn').onclick = () => {
+  if (saved.some(x => near(x, place))) saved = saved.filter(x => !near(x, place)); else saved.push({ name: place.name, region: place.region || '', lat: place.lat, lon: place.lon });
+  savePlaces(); updateStar();
+};
+async function openPlaces() {
+  const box = $('#pl'); openDlg($('#places'));
+  const draw = tp => { box.innerHTML = saved.length ? saved.map((x, i) => `<div class="pr"><button class="pgo" data-go="${i}"><b>${esc(x.name)}</b><span class="pt">${tp && tp[i] ? tp[i].t + '°' : ''}</span><small>${esc(tp && tp[i] ? tp[i].w : x.region)}</small></button><button class="ed" data-rm="${i}" aria-label="Remove ${esc(x.name)}">×</button></div>`).join('') : '<p class="sub" style="margin-top:14px">Tap the star next to a city name to save it.</p>'; };
+  draw(null);
+  if (!saved.length) return;
+  try {
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${saved.map(x => x.lat).join(',')}&longitude=${saved.map(x => x.lon).join(',')}&current=temperature_2m,weather_code&timezone=auto`);
+    const j = await r.json(), arr = Array.isArray(j) ? j : [j];
+    draw(arr.map(o => o && o.current ? { t: Math.round(o.current.temperature_2m), w: wmo(o.current.weather_code) } : null));
+  } catch {}
+}
+$('#plBtn').onclick = openPlaces; $('#plx').onclick = () => closeDlg($('#places'));
+$('#pl').addEventListener('click', e => {
+  const g = e.target.closest('[data-go]'), r = e.target.closest('[data-rm]');
+  if (g) { const x = saved[+g.dataset.go]; closeDlg($('#places')); setPlace({ name: x.name, region: x.region, lat: x.lat, lon: x.lon }); }
+  if (r) { saved.splice(+r.dataset.rm, 1); savePlaces(); updateStar(); openPlaces(); }
+});
+
+
+
+// fishing log: entries and photos stay on this phone (IndexedDB)
+const LDB = new Promise((ok, no) => { try { const r = indexedDB.open('tw', 1); r.onupgradeneeded = () => r.result.createObjectStore('logs', { keyPath: 'id' }); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); } catch (e) { no(e); } });
+LDB.catch(() => {});
+const ltx = (mode, fn) => LDB.then(d => new Promise((ok, no) => { const t = d.transaction('logs', mode), q = fn(t.objectStore('logs')); t.oncomplete = () => ok(q && q.result); t.onerror = t.onabort = () => no(t.error); }));
+const logAll = () => ltx('readonly', s => s.getAll()), logPut = e => ltx('readwrite', s => s.put(e)), logDel = id => ltx('readwrite', s => s.delete(id));
+let logs = [], lurls = [], lpre = [], pvu = [], draft = null, armed = 0;
+const lnew = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const ltime = ts => new Date(ts - new Date(ts).getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
+
+async function shrink(file, max, q) {
+  try {
+    const img = await Promise.race([new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = URL.createObjectURL(file); }), new Promise((_, no) => setTimeout(no, 15000))]);
+    const k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');
+    c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(img.src);
+    return await new Promise(ok => c.toBlob(b => ok(b || file), 'image/jpeg', q));
+  } catch { return file; }
+}
+function condNow(ts) {
+  const o = { moon: moon(new Date(ts).toISOString().slice(0, 10)).name };
+  if (data && Math.abs(ts - Date.now()) < 6 * 36e5) { const c = data.current; o.t = Math.round(c.temperature_2m); o.p = Math.round(c.pressure_msl); o.c = wmo(c.weather_code); }
+  return o;
+}
+async function renderLog() {
+  try { logs = (await logAll()).sort((a, b) => b.ts - a.ts); $('#lgerr').hidden = true; } catch { logs = []; $('#lgerr').hidden = false; }
+  lurls.forEach(u => URL.revokeObjectURL(u)); lurls = [];
+  const url = b => { const u = URL.createObjectURL(b); lurls.push(u); return u; }, num = k => Math.max(0, ...logs.map(e => +e[k] || 0));
+  $('#lgstats').innerHTML = [[logs.length, 'entries'], [num('len') ? num('len') + ' cm' : '–', 'longest'], [num('wt') ? num('wt') + ' kg' : '–', 'heaviest']].map(([n, l]) => `<div class="sc2"><b>${n}</b><span>${l}</span></div>`).join('');
+  $('#lglist').innerHTML = logs.length ? logs.map(e => {
+    const d = new Date(e.ts), when = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + hm(d);
+    const size = [e.len && e.len + ' cm', e.wt && e.wt + ' kg', e.bait].filter(Boolean).join(' · ');
+    const wx = e.wx ? [e.wx.t != null && e.wx.t + '°', e.wx.p && e.wx.p + ' hPa', e.wx.c, e.wx.moon].filter(Boolean).join(' · ') : '';
+    const ph = (e.photos || []).length ? '<div class="lph">' + e.photos.slice(0, 4).map((p, i) => `<button type="button" class="pbtn" data-pv="${e.id}" data-n="${i}" aria-label="Open photo ${i + 1}"><img class="pr" src="${url(p.thumb)}" alt="" loading="lazy"></button>`).join('') + '</div>' : '';
+    return `<article class="card le">${ph}<button type="button" class="lbody" data-edit="${e.id}"><b class="wn">${esc(e.species || 'Trip note')}</b><span class="wl">${esc(when + (e.place ? ' · ' + e.place : ''))}</span>${size ? `<span class="wt">${esc(size)}</span>` : ''}${wx ? `<span class="wl">${esc(wx)}</span>` : ''}${e.note ? `<span class="ln">${esc(e.note)}</span>` : ''}</button></article>`;
+  }).join('') : '<p class="empty">Nothing logged yet</p>';
+}
+function drawDraft() {
+  lpre.forEach(u => URL.revokeObjectURL(u)); lpre = [];
+  $('#lgpre').innerHTML = draft.photos.map((p, i) => { const u = URL.createObjectURL(p.thumb); lpre.push(u); return `<div class="pv1"><img src="${u}" alt="Photo ${i + 1}"><button type="button" data-rmp="${i}" aria-label="Remove photo ${i + 1}">×</button></div>`; }).join('');
+}
+function openLog(id) {
+  const e = id ? logs.find(x => x.id === id) : null; if (id && !e) return;
+  draft = { id: e ? e.id : lnew(), wx: e ? e.wx : null, photos: e ? e.photos.map(p => ({ full: p.full, thumb: p.thumb })) : [] };
+  $('#lgt').textContent = e ? 'Edit entry' : 'New entry';
+  $('#lgsp1').value = e ? e.species : ''; $('#lgl').value = e ? e.len : ''; $('#lgw').value = e ? e.wt : ''; $('#lgbt1').value = e ? e.bait : '';
+  $('#lgpl').value = e ? e.place : place.name; $('#lgdt').value = ltime(e ? e.ts : Date.now()); $('#lgnt').value = e ? e.note : '';
+  $('#lgdel').hidden = !e; armed = 0; $('#lgdel').textContent = 'Delete';
+  const opts = k => [...new Set(logs.map(x => x[k]).filter(Boolean))].map(x => `<option value="${esc(x)}">`).join('');
+  $('#lgsp').innerHTML = opts('species'); $('#lgbt').innerHTML = opts('bait');
+  drawDraft(); openDlg($('#lgd'));
+}
+$('#lgnew').onclick = () => openLog(null);
+$('#lglist').addEventListener('click', e => {
+  const p = e.target.closest('[data-pv]'), ed = e.target.closest('[data-edit]');
+  if (p) openPV(p.dataset.pv, +p.dataset.n); else if (ed) openLog(ed.dataset.edit);
+});
+$('#lgadd').onclick = () => $('#lgph').click();
+$('#lgph').onchange = async e => {
+  const fs = [...e.target.files].slice(0, 12 - draft.photos.length), b = $('#lgadd'); if (!fs.length) return;
+  b.disabled = true; b.textContent = 'Processing…';
+  for (const f of fs) draft.photos.push({ full: await shrink(f, 1280, .78), thumb: await shrink(f, 640, .72) });
+  b.disabled = false; b.textContent = 'Add photos'; e.target.value = ''; drawDraft();
+};
+$('#lgpre').addEventListener('click', e => { const r = e.target.closest('[data-rmp]'); if (r) { draft.photos.splice(+r.dataset.rmp, 1); drawDraft(); } });
+$('#lgsave').onclick = async () => {
+  const v = id => $(id).value.trim(), ts = $('#lgdt').value ? new Date($('#lgdt').value).getTime() : Date.now();
+  if (!draft.photos.length && !v('#lgsp1') && !v('#lgnt')) return;
+  const e = { id: draft.id, ts, place: v('#lgpl'), species: v('#lgsp1'), len: v('#lgl'), wt: v('#lgw'), bait: v('#lgbt1'), note: v('#lgnt'), wx: draft.wx || condNow(ts), photos: draft.photos.map(p => ({ full: p.full, thumb: p.thumb })) };
+  try { await logPut(e); try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch {} closeDlg($('#lgd')); renderLog(); }
+  catch { $('#lgsave').textContent = 'Could not save'; setTimeout(() => $('#lgsave').textContent = 'Save', 2500); }
+};
+$('#lgdel').onclick = async () => {
+  if (!armed) { armed = 1; $('#lgdel').textContent = 'Tap again to delete'; setTimeout(() => { armed = 0; $('#lgdel').textContent = 'Delete'; }, 3000); return; }
+  await logDel(draft.id); closeDlg($('#lgd')); renderLog();
+};
+$('#lgx').onclick = () => closeDlg($('#lgd'));
+$('#lgd').addEventListener('close', () => { lpre.forEach(u => URL.revokeObjectURL(u)); lpre = []; });
+function openPV(id, n) {
+  const e = logs.find(x => x.id === id); if (!e) return;
+  pvu = e.photos.map(p => URL.createObjectURL(p.full));
+  $('#pvs').innerHTML = pvu.map((u, i) => `<img src="${u}" alt="Photo ${i + 1} of ${pvu.length}">`).join('');
+  $('#pvc').textContent = pvu.length > 1 ? (n + 1) + ' / ' + pvu.length : '';
+  openDlg($('#pv')); $('#pvs').scrollLeft = n * $('#pvs').clientWidth;
+}
+$('#pvs').addEventListener('scroll', () => { const s = $('#pvs'); if (pvu.length > 1) $('#pvc').textContent = (Math.round(s.scrollLeft / (s.clientWidth || 1)) + 1) + ' / ' + pvu.length; });
+$('#pvx').onclick = () => closeDlg($('#pv'));
+$('#pv').addEventListener('close', () => { pvu.forEach(u => URL.revokeObjectURL(u)); pvu = []; });
+// backup: export or import the whole log as one file
+const blobData = b => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = no; r.readAsDataURL(b); });
+$('#lgex').onclick = async () => {
+  try {
+    const out = [];
+    for (const e of await logAll()) out.push({ ...e, photos: await Promise.all((e.photos || []).map(async p => ({ full: await blobData(p.full), thumb: await blobData(p.thumb) }))) });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({ v: 1, logs: out })], { type: 'application/json' }));
+    a.download = 'fishing-log-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    $('#lgnote').textContent = out.length + ' entries exported';
+  } catch { $('#lgnote').textContent = 'Export failed'; }
+};
+$('#lgim').onclick = () => $('#lgfile').click();
+$('#lgfile').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const j = JSON.parse(await f.text()); let n = 0;
+    for (const x of j.logs || []) { x.photos = await Promise.all((x.photos || []).map(async p => ({ full: await (await fetch(p.full)).blob(), thumb: await (await fetch(p.thumb)).blob() }))); await logPut(x); n++; }
+    $('#lgnote').textContent = n + ' entries imported'; renderLog();
+  } catch { $('#lgnote').textContent = 'That file could not be read'; }
+  e.target.value = '';
+};
+
 // tabs
-const VIEWS = { today: '#viewToday', map: '#viewMap', pack: '#viewPack', wild: '#viewWild' }, HASH = { map: 'map', pack: 'packing', wild: 'wildlife' };
+const VIEWS = { today: '#viewToday', map: '#viewMap', pack: '#viewPack', wild: '#viewWild', log: '#viewLog' }, HASH = { map: 'map', pack: 'packing', wild: 'wildlife', log: 'log' };
 function show(v) {
   Object.entries(VIEWS).forEach(([k, sel]) => $(sel).hidden = k !== v);
   document.querySelectorAll('.nb').forEach(b => b.setAttribute('aria-current', b.dataset.v === v ? 'page' : 'false'));
   if (v === 'map') { $('#msub').textContent = 'Around ' + place.name; initMap(); if (map) setTimeout(() => map.invalidateSize(), 60); }
   if (v === 'wild') loadWild();
+  if (v === 'log') renderLog();
+  fadeIn($(VIEWS[v]));
   history.replaceState(null, '', v === 'today' ? location.pathname : '#' + HASH[v]); scrollTo(0, 0);
 }
 document.querySelectorAll('.nb').forEach(b => b.onclick = () => show(b.dataset.v));
@@ -614,7 +919,7 @@ $('#here').onclick = () => navigator.geolocation && navigator.geolocation.getCur
 }, () => { $('#here').textContent = 'Location not available'; });
 
 // search
-function setPlace(p) { place = p; try { localStorage.setItem('place', JSON.stringify(p)); } catch {} history.replaceState(null, '', location.pathname); load(); }
+function setPlace(p) { place = p; try { localStorage.setItem('place', JSON.stringify(p)); } catch {} history.replaceState(null, '', location.pathname); load().then(() => fadeIn($('#viewToday'))); }
 let tm; const box = $('#results');
 $('#q').addEventListener('input', e => {
   clearTimeout(tm); const v = e.target.value.trim();
