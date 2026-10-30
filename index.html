@@ -25,15 +25,16 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root{--edge:color-mix(in srgb,var(--card),#000 38%);--well:color-mix(in srgb,var(--bg),#000 30%);--soil:color-mix(in srgb,var(--card),var(--tan) 16%);--line:color-mix(in srgb,var(--ink) 15%,transparent);--stitch:color-mix(in srgb,var(--ink) 30%,transparent);--bar:color-mix(in srgb,var(--bg),#000 28%);--moondark:color-mix(in srgb,var(--card),#000 45%);--peak:color-mix(in srgb,var(--tan),#5a3a1a 45%)}
 html,body{margin:0;min-height:100%;background-color:var(--bg)}
 *,*::before,*::after{box-sizing:inherit}
-body{font:17px/1.35 var(--sans);color:var(--ink);background:var(--grain),radial-gradient(120% 55% at 50% 0,color-mix(in srgb,var(--bg),#fff 12%),var(--bg) 75%),var(--bg);background-attachment:fixed}
+body{font:17px/1.35 var(--sans);color:var(--ink);}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--grain),radial-gradient(120% 55% at 50% 0,color-mix(in srgb,var(--bg),#fff 12%),var(--bg) 75%),var(--bg)}
 button{font:inherit;color:inherit;cursor:pointer}
 main{max-width:560px;margin:0 auto;padding:22px 18px 120px}
 .ib,.ch,.ghost,.loc,.day,.th{background:linear-gradient(180deg,color-mix(in srgb,var(--card),#fff 9%),var(--card));border:1px solid var(--edge);box-shadow:inset 0 1px 0 var(--hi),0 2px 0 var(--edge),0 6px 10px -4px var(--shadow);color:var(--ink)}
 .ib:active,.ch:active,.ghost:active,.loc:active,.day:active,.th:active,.nb:active{transform:translateY(2px);box-shadow:inset 0 2px 6px var(--shadow)}
 .ch[aria-pressed=true],.th[aria-pressed=true],.day[aria-current=true]{background:linear-gradient(180deg,color-mix(in srgb,var(--leaf),#fff 18%),var(--leaf));color:var(--on);border-color:color-mix(in srgb,var(--leaf),#000 35%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 0 color-mix(in srgb,var(--leaf),#000 40%),0 6px 10px -4px var(--shadow)}
 .top{position:relative;display:flex;gap:10px;align-items:center}
-.sb{flex:1;display:flex;align-items:center;gap:10px;height:48px;border-radius:24px;background:var(--well);box-shadow:inset 0 2px 6px var(--shadow),0 1px 0 var(--hi);padding:0 16px;color:var(--mute)}
-.sb input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--ink);font:inherit;font-size:17px}
+.sb{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:48px;border-radius:24px;background:var(--well);box-shadow:inset 0 2px 6px var(--shadow),0 1px 0 var(--hi);padding:0 16px;color:var(--mute)}
+.sb input{flex:1;width:100%;min-width:0;background:none;border:0;outline:0;color:var(--ink);font:inherit;font-size:17px}
 .sb:focus-within{box-shadow:inset 0 2px 6px var(--shadow),0 0 0 2px var(--acc)}
 .ib{width:48px;height:48px;border-radius:24px;display:grid;place-items:center;padding:0;flex:none}
 #results{position:absolute;left:58px;right:0;top:54px;z-index:5;margin:0;padding:6px;list-style:none;border-radius:14px;background:var(--card);border:1px solid var(--edge);box-shadow:0 14px 30px var(--shadow)}
@@ -126,10 +127,12 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .sws i{width:12px;height:30px}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.fade{animation:fade .28s ease-out both}
+#viewToday,#viewMap,#viewPack,#viewWild,#viewLog{animation:fade .28s ease-out backwards}
+#viewToday{transition:opacity .18s ease}
+#viewToday.busy{opacity:0}
 @keyframes pulse{50%{opacity:.45}}
 .ld .ch{animation:pulse 1s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){.fade,.ld .ch{animation:none}}
+@media (prefers-reduced-motion:reduce){#viewToday,#viewMap,#viewPack,#viewWild,#viewLog,.ld .ch{animation:none;transition:none}}
 .hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 .hrow .ib{width:44px;height:44px;margin-bottom:-2px}
 #starBtn[aria-pressed=true] svg{fill:var(--tan);stroke:var(--tan)}
@@ -155,7 +158,7 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .lph{display:flex;gap:8px;flex-wrap:wrap}
 .pbtn{background:none;border:0;padding:0;display:block;flex:1 1 100%}
 .pbtn+.pbtn{flex:0 0 calc(33.333% - 6px)}
-.pr{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:4px solid #F7F2E4;border-radius:3px;box-shadow:0 3px 8px var(--shadow);background:var(--soil)}
+.lpic{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border:4px solid #F7F2E4;border-radius:3px;box-shadow:0 3px 8px var(--shadow);background:var(--soil)}
 .lbody{display:block;width:100%;text-align:left;background:none;border:0;padding:12px 0 0;color:inherit}
 .lbody span{display:block}
 .ln{margin-top:6px;font-size:16px;line-height:1.4}
@@ -167,6 +170,8 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .pv1 button{position:absolute;top:-8px;right:-8px;width:32px;height:32px;border-radius:16px;border:1px solid var(--edge);background:var(--card);color:var(--ink);font-size:18px;line-height:1}
 .pvs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-top:12px}
 .pvs img{flex:0 0 100%;width:100%;scroll-snap-align:center;max-height:70vh;object-fit:contain;display:block;border:6px solid #F7F2E4;border-radius:3px;background:#F7F2E4;box-shadow:0 6px 16px var(--shadow)}
+@media (max-width:420px){.top{gap:8px}.ib{width:44px;height:44px}}
+main{overflow-x:clip}
 [hidden]{display:none!important}
 </style>
 
@@ -753,7 +758,11 @@ function openLB(id) {
 document.addEventListener('click', e => { const c = e.target.closest('.wc[data-id]'); if (c) openLB(c.dataset.id); });
 
 // fade between screens
-function fadeIn(el) { el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade'); }
+async function swapToday(job) {
+  const v = $('#viewToday'); v.classList.add('busy');
+  await new Promise(r => setTimeout(r, 180));
+  try { await job(); } finally { requestAnimationFrame(() => v.classList.remove('busy')); }
+}
 
 // saved places, like a phone weather app
 let saved = []; try { saved = JSON.parse(localStorage.getItem('places') || '[]'); } catch {}
@@ -816,7 +825,7 @@ async function renderLog() {
     const d = new Date(e.ts), when = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' }) + ' · ' + hm(d);
     const size = [e.len && e.len + ' cm', e.wt && e.wt + ' kg', e.bait].filter(Boolean).join(' · ');
     const wx = e.wx ? [e.wx.t != null && e.wx.t + '°', e.wx.p && e.wx.p + ' hPa', e.wx.c, e.wx.moon].filter(Boolean).join(' · ') : '';
-    const ph = (e.photos || []).length ? '<div class="lph">' + e.photos.slice(0, 4).map((p, i) => `<button type="button" class="pbtn" data-pv="${e.id}" data-n="${i}" aria-label="Open photo ${i + 1}"><img class="pr" src="${url(p.thumb)}" alt="" loading="lazy"></button>`).join('') + '</div>' : '';
+    const ph = (e.photos || []).length ? '<div class="lph">' + e.photos.slice(0, 4).map((p, i) => `<button type="button" class="pbtn" data-pv="${e.id}" data-n="${i}" aria-label="Open photo ${i + 1}"><img class="lpic" src="${url(p.thumb)}" alt="" loading="lazy"></button>`).join('') + '</div>' : '';
     return `<article class="card le">${ph}<button type="button" class="lbody" data-edit="${e.id}"><b class="wn">${esc(e.species || 'Trip note')}</b><span class="wl">${esc(when + (e.place ? ' · ' + e.place : ''))}</span>${size ? `<span class="wt">${esc(size)}</span>` : ''}${wx ? `<span class="wl">${esc(wx)}</span>` : ''}${e.note ? `<span class="ln">${esc(e.note)}</span>` : ''}</button></article>`;
   }).join('') : '<p class="empty">Nothing logged yet</p>';
 }
@@ -901,7 +910,6 @@ function show(v) {
   if (v === 'map') { $('#msub').textContent = 'Around ' + place.name; initMap(); if (map) setTimeout(() => map.invalidateSize(), 60); }
   if (v === 'wild') loadWild();
   if (v === 'log') renderLog();
-  fadeIn($(VIEWS[v]));
   history.replaceState(null, '', v === 'today' ? location.pathname : '#' + HASH[v]); scrollTo(0, 0);
 }
 document.querySelectorAll('.nb').forEach(b => b.onclick = () => show(b.dataset.v));
@@ -913,13 +921,13 @@ function openMenu() { drawer.hidden = scrim.hidden = false; mb.setAttribute('ari
 function closeMenu() { drawer.hidden = scrim.hidden = true; mb.setAttribute('aria-expanded', 'false'); mb.focus(); }
 mb.onclick = openMenu; $('#closeBtn').onclick = closeMenu; scrim.onclick = closeMenu;
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !drawer.hidden) closeMenu(); });
-$('#days').addEventListener('click', e => { const b = e.target.closest('.day'); if (b) { day = +b.dataset.k; render(); closeMenu(); } });
+$('#days').addEventListener('click', e => { const b = e.target.closest('.day'); if (b) { closeMenu(); swapToday(() => { day = +b.dataset.k; render(); }); } });
 $('#here').onclick = () => navigator.geolocation && navigator.geolocation.getCurrentPosition(p => {
   setPlace({ name: 'My location', region: '', lat: +p.coords.latitude.toFixed(4), lon: +p.coords.longitude.toFixed(4) }); closeMenu();
 }, () => { $('#here').textContent = 'Location not available'; });
 
 // search
-function setPlace(p) { place = p; try { localStorage.setItem('place', JSON.stringify(p)); } catch {} history.replaceState(null, '', location.pathname); load().then(() => fadeIn($('#viewToday'))); }
+function setPlace(p) { place = p; try { localStorage.setItem('place', JSON.stringify(p)); } catch {} history.replaceState(null, '', location.pathname); swapToday(load); }
 let tm; const box = $('#results');
 $('#q').addEventListener('input', e => {
   clearTimeout(tm); const v = e.target.value.trim();
