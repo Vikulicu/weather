@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#101912">
-<script>(function(){try{var t=localStorage.getItem('theme')||'dark',m=new Date().getMonth();var k=t==='auto'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t==='season'?(m<2||m==11?'winter':m<5?'spring':m<8?'summer':'autumn'):t;document.documentElement.dataset.theme=k}catch(e){document.documentElement.dataset.theme='dark'}})()</script>
+<script>(function(){try{var t=localStorage.getItem('theme2')||'light',m=new Date().getMonth();var k=t==='auto'?(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t==='season'?(m<2||m==11?'winter':m<5?'spring':m<8?'summer':'autumn'):t;document.documentElement.dataset.theme=k}catch(e){document.documentElement.dataset.theme='light'}})()</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>Trail &amp; Water</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Zilla+Slab:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 :root{--sans:"Alegreya Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--slab:"Zilla Slab",Georgia,serif;
@@ -173,37 +173,165 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 @media (max-width:420px){.top{gap:8px}.ib{width:44px;height:44px}}
 main{overflow-x:clip}
 [hidden]{display:none!important}
+/* ===== Clean illustrated look (fishing) ===== */
+:root{--sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--slab:var(--sans);--grain:none}
+:root,:root[data-theme=light]{--bg:#F6F2E9;--card:#FFFFFF;--ink:#1D2B22;--mute:#5F6B63;--leaf:#1E5F44;--tan:#F1B15C;--acc:#1E5F44;--on:#FFFFFF;--hi:transparent;--shadow:rgba(40,70,50,.10);--water:#2F7F94;color-scheme:light}
+:root[data-theme=dark]{--bg:#101912;--card:#1A281B;--ink:#EDE6D6;--mute:#A8B39B;--leaf:#86C46F;--tan:#D9A25C;--acc:#86C46F;--on:#101912;--hi:rgba(255,255,255,.05);--shadow:rgba(0,0,0,.45);--water:#6FB3C4;color-scheme:dark}
+:root[data-theme=summer]{--bg:#F8F1DC;--card:#FFFFFF;--ink:#1E3A44;--mute:#55707A;--leaf:#1B7A5E;--tan:#F3B84A;--acc:#1B7A5E;--on:#FFFFFF;--hi:transparent;--shadow:rgba(30,60,70,.10);--water:#1B7FA3;color-scheme:light}
+:root[data-theme=autumn]{--bg:#F6EBDD;--card:#FFFFFF;--ink:#33251A;--mute:#6E5B4B;--leaf:#A5521F;--tan:#F0B15A;--acc:#9A4A1A;--on:#FFFFFF;--hi:transparent;--shadow:rgba(90,50,20,.10);--water:#4F8FA0;color-scheme:light}
+:root[data-theme=spring]{--bg:#EEF5E4;--card:#FFFFFF;--ink:#22351D;--mute:#56694B;--leaf:#3F7B2D;--tan:#F0A3B5;--acc:#3F7B2D;--on:#FFFFFF;--hi:transparent;--shadow:rgba(40,70,30,.10);--water:#3E8FAE;color-scheme:light}
+:root[data-theme=winter]{--bg:#E9F0F5;--card:#FFFFFF;--ink:#1B2B3A;--mute:#556675;--leaf:#2C6DA3;--tan:#BFD6E6;--acc:#2C6DA3;--on:#FFFFFF;--hi:transparent;--shadow:rgba(30,60,90,.10);--water:#2C6DA3;color-scheme:light}
+body{font:16px/1.4 var(--sans)}
+body::before{background:var(--bg)}
+main{max-width:560px;padding:0 0 130px}
+#viewPack,#viewMap,#viewWild,#viewLog,#viewIns,#viewProf{padding:calc(22px + env(safe-area-inset-top,0px)) 20px 0}
+h1{font:800 26px/1.15 var(--sans);letter-spacing:-.4px;text-shadow:none;margin:0}
+h2{font:800 18px var(--sans)}
+.k,.g{font:800 15px var(--sans);letter-spacing:0;text-transform:none;color:var(--ink);text-shadow:none}
+.g{font-size:13px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.sub{margin:2px 0 0;font-size:14px}
+.card{background:var(--card);border-radius:22px;box-shadow:0 8px 22px var(--shadow);padding:16px;margin-top:12px}
+.card::after{display:none}
+.big{font:800 72px/1 var(--sans);letter-spacing:-2px;text-shadow:none}
+.ib,.ch,.ghost,.loc,.day,.th,.city{background:var(--card);border:0;box-shadow:0 4px 14px var(--shadow);color:var(--ink)}
+.ib:active,.ch:active,.ghost:active,.loc:active,.day:active,.th:active,.city:active{transform:scale(.97);box-shadow:0 2px 6px var(--shadow)}
+.ch[aria-pressed=true],.th[aria-pressed=true],.day[aria-current=true],.city[aria-current=true]{background:var(--leaf);color:var(--on);border:0;box-shadow:0 4px 14px var(--shadow)}
+.pri,.add button{background:var(--leaf);color:var(--on);border:0;box-shadow:0 6px 16px var(--shadow)}
+.it .tag{color:#1D2B22}
+.sb,.add input,.add select,.add textarea,.fl input{background:var(--card);box-shadow:0 4px 14px var(--shadow);border:0}
+.sb:focus-within{box-shadow:0 4px 14px var(--shadow),0 0 0 2px var(--acc)}
+dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+#drawer{background:var(--bg);border-left:0;box-shadow:-10px 0 30px var(--shadow)}
+.nav{background:var(--card);border-radius:24px 24px 0 0;border-top:0;box-shadow:0 -6px 20px var(--shadow)}
+.nb{color:var(--mute);opacity:1;font:700 11px var(--sans);letter-spacing:0}
+.nb[aria-current=page]{background:none;box-shadow:none;color:var(--leaf)}
+.sc2,.bt{box-shadow:none}
+.sc2{background:var(--card);box-shadow:0 6px 16px var(--shadow)}
+.h.now{background:var(--leaf);box-shadow:none}.h.now span,.h.now b,.h.now em{color:var(--on)}
+.pbar{background:var(--line);box-shadow:none}.pbar div{background:var(--leaf)}
+.tl,.tl i{box-shadow:none}
+#viewToday,#viewWx{transition:opacity .18s ease}
+#viewToday.busy,#viewWx.busy{opacity:0}
+#viewWx,#viewIns,#viewProf{animation:fade .28s ease-out backwards}
+@media (prefers-reduced-motion:reduce){#viewWx,#viewIns,#viewProf{animation:none}}
+/* hero + home */
+.hero{position:relative;height:330px;overflow:hidden}
+.hero-wx{height:390px}
+.scene,.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .top{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:20px;right:20px}
+.hero #results{right:58px}
+.hrow{position:absolute;top:calc(74px + env(safe-area-inset-top,0px));left:20px;right:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.tt{background:rgba(255,255,255,.86);color:#10201A;padding:8px 14px;border-radius:16px;min-width:0}
+.tt .hello{margin:0;font-size:12px;font-weight:600}.tt h1{font-size:22px;color:#10201A}
+.pull{position:relative;z-index:1;margin-top:-72px;padding:0 20px}
+.hduo{display:flex;gap:12px;margin-top:0}
+.hduo>button{flex:1;min-width:0;margin:0;text-align:left;font:inherit;color:inherit;border:0}
+.hring{display:flex;gap:12px;align-items:center}
+.hring span{display:block;min-width:0}.hring small,.hwx small{display:block;color:var(--mute);font-size:12px}
+.hring b{display:block;font-size:17px;font-weight:800}.hring em{display:block;font-style:normal;font-size:12px;color:var(--acc);font-weight:700}
+.hwx b{font-size:28px;font-weight:800}.hwx .pp{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hh{margin:24px 0 12px;font-size:18px}
+.hhr{display:flex;justify-content:space-between;align-items:baseline}
+.hsg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hsx{margin:0;padding:14px;min-height:108px;text-align:left;border:0;font:inherit;color:inherit}
+.hsx b{display:block;font-size:26px;font-weight:800;margin-top:12px}.hsx>span:last-child{font-size:13px;color:var(--mute)}
+.hico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;flex:none}
+.hc-g{background:#E0EFE4;color:#1E5F44}.hc-b{background:#E2F0FB;color:#1A5FA0}.hc-s{background:#FCEAD2;color:#9A5113}.hc-t{background:#EFE3D6;color:#7A4B22}
+.hpill{display:inline-block;padding:5px 10px;border-radius:999px;font:700 12px var(--sans);white-space:nowrap}
+.hqa{padding:6px 16px;margin-top:0}
+.hqr{display:flex;align-items:center;gap:12px;width:100%;padding:12px 0;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;color:inherit;font:inherit}
+.hqr:last-child{border-bottom:0}.hqr .hq{flex:1;min-width:0}.hqr b{display:block;font-size:15px}.hqr small{color:var(--mute);font-size:13px}
+.hck{display:flex;align-items:center;gap:12px;min-height:48px;font-size:15px;font-weight:500}
+.hck input{width:22px;height:22px;margin:0;accent-color:var(--leaf)}.hck span{flex:1}.hck em{font-style:normal;font-size:12px;color:var(--mute)}
+.hs2{font-size:13px;color:var(--mute)}
+.hsp{display:flex;gap:12px;overflow-x:auto;margin:0 -20px;padding:0 20px 8px;scrollbar-width:none}
+.hspc{flex:none;width:210px;padding:0;margin:0;overflow:hidden;text-align:left;border:0;font:inherit;color:inherit}
+.hspc svg{display:block}.hspc>span{display:block;padding:10px 14px 12px}.hspc b{display:block;font-size:15px}.hspc small{color:var(--mute);font-size:13px}
+/* weather */
+.wbar{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:20px;right:20px;display:flex;align-items:center;justify-content:space-between}
+.pillp{background:rgba(255,255,255,.88);color:#10201A;padding:10px 16px;border-radius:999px;font-weight:700;font-size:14px}
+.wbig{position:absolute;top:calc(86px + env(safe-area-inset-top,0px));left:24px;color:#10201A}
+.wbig .wcond{margin:6px 0 0;font-size:20px;font-weight:700}.wbig .whilo{margin:2px 0 0;font-size:14px;font-weight:500}
+.hero.night .wbig{color:#fff}
+.sheet{position:relative;margin-top:-28px;background:var(--bg);border-radius:28px 28px 0 0;padding:14px 20px 0}
+.sheet::before{content:"";display:block;width:44px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 14px}
+#details{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 0;padding:0;border:0}
+#details .d{background:var(--card);border-radius:18px;padding:14px;box-shadow:0 6px 16px var(--shadow)}
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+/* insights + profile */
+.per{display:flex;gap:4px;background:var(--line);border-radius:999px;padding:4px;margin-top:16px}
+.per button{flex:1;min-height:44px;border:0;border-radius:999px;background:none;color:var(--mute);font:700 14px var(--sans)}
+.per button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 3px 8px var(--shadow)}
+.bars{display:flex;justify-content:space-between;align-items:flex-end;height:130px;margin-top:14px}
+.bars div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;width:22px;height:100%}
+.bars i{display:block;width:14px;border-radius:7px;background:var(--line)}.bars .on i{background:var(--leaf)}.bars span{font-size:11px;color:var(--mute)}
+.spb{margin-top:14px}.spb div{display:flex;justify-content:space-between;font-size:14px}.spb span{color:var(--mute)}
+.spb i{display:block;height:8px;border-radius:4px;background:var(--line);margin-top:6px}.spb u{display:block;height:100%;border-radius:4px}
+.tip{background:#FCEAD2;color:#33251A;border-radius:22px;padding:16px;margin-top:12px}.tip b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9A5113}.tip p{margin:4px 0 0;font-weight:700}
+.pf{display:flex;align-items:center;gap:14px}
+.av{width:56px;height:56px;flex:none;border-radius:28px;background:var(--leaf);color:var(--on);display:grid;place-items:center;font:800 22px var(--sans)}
+.fl2{flex:1;display:block}.fl2 small{display:block;color:var(--mute);font-size:12px;margin-bottom:4px}
+.fl2 input{width:100%;height:44px;border-radius:14px;border:0;background:var(--bg);color:var(--ink);padding:0 14px;font:inherit;font-size:16px}
+.pfb{display:block;width:100%;text-align:left;border:0;font:700 15px var(--sans);color:var(--ink)}
 </style>
 
 </head>
 <body>
 <main>
 <div id="viewToday">
-  <div class="top">
-    <button id="plBtn" class="ib" aria-label="Saved places"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></button>
-    <label class="sb">
+  <section class="hero" id="heroH">
+    <div class="scene" id="scHome" aria-hidden="true"></div>
+    <div class="top">
+      <label class="sb">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
       <input id="q" type="search" placeholder="Search a city" aria-label="Search a city or place" autocomplete="off">
     </label>
-    <button id="gearBtn" class="ib" aria-label="Settings"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg></button>
-    <button id="menuBtn" class="ib" aria-label="Open menu: choose a day" aria-expanded="false" aria-controls="drawer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-    <ul id="results" hidden></ul>
-  </div>
-
-  <div class="hrow"><h1 id="place">&nbsp;</h1><button id="starBtn" class="ib" aria-pressed="false" aria-label="Save this place"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg></button></div>
-  <p class="sub" id="dayline"></p>
-
-  <section class="card" aria-live="polite">
-    <div class="row">
-      <div><div class="big" id="temp">–</div><p id="cond" style="margin:8px 0 0;font-size:20px;font-weight:500">Loading…</p></div>
-      <div id="hilo" style="text-align:right;font-size:15px;color:var(--mute);line-height:1.6"></div>
+      <button id="plBtn" class="ib" aria-label="Saved places"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></button>
+      <ul id="results" hidden></ul>
     </div>
-    <div class="grid" id="details"></div>
+    <div class="hrow"><div class="tt"><p class="hello" id="hello"></p><h1 id="place">&nbsp;</h1></div><button id="starBtn" class="ib" aria-pressed="false" aria-label="Save this place"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg></button></div>
   </section>
-
-  <section class="card">
+  <div class="pull">
+    <div class="hduo">
+      <button class="card hring" data-to="wx" aria-label="Open the fishing outlook"><svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke="var(--line)" stroke-width="6"/><circle id="ring" cx="28" cy="28" r="22" fill="none" stroke="var(--leaf)" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 138.2" transform="rotate(-90 28 28)" style="transition:stroke-dasharray .6s"/><text id="ringn" x="28" y="34" text-anchor="middle" font-size="18" font-weight="800" fill="currentColor">–</text></svg><span><small>Fishing score</small><b id="hlabel">–</b><em id="hwhy"></em></span></button>
+      <button class="card hwx" data-to="wx" aria-label="Open the weather"><b id="hTemp">–</b><small id="hCond"></small><span class="pp"><i class="hpill hc-b" id="hRain">–</i><i class="hpill hc-g" id="hWind">–</i></span></button>
+    </div>
+    <h2 class="hh">Quick stats</h2>
+    <div class="hsg">
+      <button class="card hsx" data-to="log"><span class="hico hc-g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12c4-6 12-6 16 0-4 6-12 6-16 0z"/><path d="M19 12l3-3v6z"/></svg></span><b id="sxCatch">0</b><span>Catches this year</span></button>
+      <button class="card hsx" data-to="ins"><span class="hico hc-t"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg></span><b id="sxSp">0</b><span>Species caught</span></button>
+      <div class="card hsx"><span class="hico hc-b"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M12 16l4-5"/></svg></span><b id="sxPr">–</b><span>Pressure, hPa</span></div>
+      <div class="card hsx"><span class="hico hc-s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14A8 8 0 1 1 10 4a6.5 6.5 0 0 0 10 10z"/></svg></span><b id="sxMo">–</b><span id="sxMoN"></span></div>
+    </div>
+    <h2 class="hh">Quick actions</h2>
+    <div class="card hqa">
+      <button class="hqr" data-to="wx"><span class="hico hc-b"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="hq"><b>Best time to fish</b><small id="qaTimeS">–</small></span><i class="hpill hc-g" id="qaTime">–</i></button>
+      <button class="hqr" data-to="wx"><span class="hico hc-s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3C8 8 6 11 6 14a6 6 0 0 0 12 0c0-3-2-6-6-11z"/></svg></span><span class="hq"><b>Weather and hourly</b><small id="qaWxS">–</small></span><i class="hpill hc-s" id="qaWx">–</i></button>
+      <button class="hqr" data-to="wild"><span class="hico hc-t"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14 0 9-6 14-14 14z"/><path d="M5 19l8-8"/></svg></span><span class="hq"><b>Wildlife nearby</b><small id="qaWildS">–</small></span><i class="hpill hc-t" id="qaWild">–</i></button>
+      <button class="hqr" data-to="pack"><span class="hico hc-g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9a5 5 0 0 1 10 0v11H7z"/><path d="M9 14h6M10 4V3h4v1"/></svg></span><span class="hq"><b>Packing list</b><small id="qaPackS">–</small></span><i class="hpill hc-g" id="qaPack">–</i></button>
+    </div>
+    <div class="hhr"><h2 class="hh">Trip checklist</h2><button class="lnk" data-to="pack">See all</button></div>
+    <div class="card" style="margin-top:0"><span class="hs2" id="hckN"></span><div class="pbar"><div id="hckB" style="width:0"></div></div><div id="hck"></div></div>
+    <h2 class="hh">My spots</h2>
+    <div class="hsp" id="hsp"></div>
+    <div id="wpre" hidden><div id="wpg"></div><button id="wall" hidden></button></div>
+    <footer><span id="src">Open-Meteo · iNaturalist · OpenStreetMap</span><span id="upd"></span></footer>
+  </div>
+</div>
+<div id="viewWx" hidden>
+  <section class="hero hero-wx" id="heroW">
+    <div class="scene" id="scWx" aria-hidden="true"></div>
+    <div class="wbar">
+      <button class="ib" data-back aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span class="pillp" id="wxPlace"></span>
+      <button id="menuBtn" class="ib" aria-label="Choose a day" aria-expanded="false" aria-controls="drawer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="14" rx="3"/><path d="M4 11h16M9 3v4M15 3v4"/></svg></button>
+    </div>
+    <div class="wbig"><div class="big" id="temp">–</div><p class="wcond" id="cond">Loading…</p><p class="whilo" id="hilo"></p></div>
+  </section>
+  <div class="sheet">
+    <div class="row" style="align-items:center"><h2>Conditions</h2><span class="hpill hc-g" id="dayline"></span></div>
+    <div id="details"></div>
+    <section class="card">
     <p class="k">Sunrise and sunset</p>
     <div class="row" style="align-items:center">
       <div><span class="d">Sunrise</span><div class="t30" id="rise">–</div></div>
@@ -233,21 +361,12 @@ main{overflow-x:clip}
     <p id="fwin" style="margin:12px 0 0;font-size:14px;line-height:1.6"></p>
   </section>
 
-  <section class="card" id="wpre" hidden>
-    <div class="row" style="align-items:baseline"><p class="k" style="margin:0">Seen near you recently</p><button class="lnk" id="wall">See all</button></div>
-    <div class="wg" id="wpg" style="margin-top:12px"></div>
-  </section>
-
-  <footer><span id="src">Open-Meteo · iNaturalist · OpenStreetMap</span><span id="upd"></span></footer>
+  
+  </div>
 </div>
 <div id="viewPack" hidden>
-  <h1>Packing</h1>
+  <div class="sh"><button class="ib" data-back aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h1>Packing list</h1></div>
   <p class="sub" id="psub"></p>
-  <div class="seg" role="group" aria-label="Activity">
-    <button data-a="fishing" aria-pressed="true">Fishing</button>
-    <button data-a="hiking" aria-pressed="false">Hiking</button>
-    <button data-a="camping" aria-pressed="false">Camping</button>
-  </div>
   <div class="card" style="margin-top:14px">
     <div class="row" style="align-items:baseline"><span id="pcount" style="font-weight:500">0 of 0 packed</span></div>
     <div class="pbar"><div id="pfill" style="width:0"></div></div>
@@ -257,20 +376,19 @@ main{overflow-x:clip}
   <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" id="preset">Untick all</button><button class="ghost" id="prestore">Restore defaults</button></div>
 </div>
 <div id="viewMap" hidden>
-  <h1>Map</h1>
+  <h1>Spots</h1>
   <p class="sub" id="msub"></p>
   <div class="chips" id="mchips" role="group" aria-label="Map layers">
     <button class="ch" data-l="fishing" aria-pressed="true">Fishing</button>
     <button class="ch" data-l="camping" aria-pressed="true">Camping</button>
     <button class="ch" data-l="water" aria-pressed="true">Water</button>
-    <button class="ch" data-l="peaks" aria-pressed="false">Peaks</button>
     <button class="ch" data-l="trails" aria-pressed="false">Trails</button>
   </div>
   <div id="map" role="application" aria-label="Map"></div>
   <div class="row" style="margin-top:10px;align-items:center;gap:12px"><button class="ghost" id="msearch" style="margin:0">Search this area</button><span class="note" id="mstat"></span></div>
 </div>
 <div id="viewWild" hidden>
-  <h1>Wildlife nearby</h1>
+  <div class="sh"><button class="ib" data-back aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h1>Wildlife nearby</h1></div>
   <p class="sub" id="wsub"></p>
   <div class="chips" id="wchips" role="group" aria-label="Filter">
     <button class="ch" aria-pressed="true">All</button><button class="ch" aria-pressed="false">Mammals</button><button class="ch" aria-pressed="false">Birds</button><button class="ch" aria-pressed="false">Fish</button>
@@ -285,24 +403,37 @@ main{overflow-x:clip}
   <p class="note" id="lgerr" style="margin-top:10px" hidden>Entries can’t be saved in this browser. Private windows block it.</p>
   <div id="lglist"></div>
 </div>
-</main>
-<nav class="nav" aria-label="Main">
-  <button class="nb" data-v="today" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/></svg>Today</button>
-  <button class="nb" data-v="map" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>Map</button>
-  <button class="nb" data-v="pack" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>Packing</button>
-  <button class="nb" data-v="wild" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12c4-6 12-6 16 0-4 6-12 6-16 0z"/><path d="M19 12l3-3v6z"/></svg>Wildlife</button>
-  <button class="nb" data-v="log" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M6 3v18M10 8h5M10 12h5"/></svg>Log</button>
-</nav>
-
-<dialog id="settings" aria-label="Settings"><div class="dlg">
-  <div class="dh"><h2>Settings</h2><button id="stx" class="ib" aria-label="Close settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-  <p class="k" style="margin:18px 0 10px">Theme</p>
+<div id="viewIns" hidden>
+  <h1>Insights</h1>
+  <p class="sub">Your fishing</p>
+  <div class="per" id="inper" role="group" aria-label="Period"><button data-p="week" aria-pressed="false">Week</button><button data-p="month" aria-pressed="true">Month</button><button data-p="year" aria-pressed="false">Year</button></div>
+  <div class="hsg" id="instats" style="margin-top:14px"></div>
+  <section class="card"><p class="k" style="margin:0">Catches per month</p><div class="bars" id="inbars"></div></section>
+  <section class="card"><p class="k" style="margin:0">Species caught</p><div id="insp"></div></section>
+  <section class="tip" id="intip" hidden></section>
+</div>
+<div id="viewProf" hidden>
+  <h1>Profile</h1>
+  <section class="card pf"><span class="av" id="pfav">A</span><label class="fl2"><small>Your name</small><input id="pname" type="text" maxlength="24" placeholder="Angler" autocomplete="off"></label></section>
+  <p class="k" style="margin:22px 0 10px">Theme</p>
   <div class="thg" id="thg"></div>
+  <p class="k" style="margin:22px 0 10px">Places</p>
+  <button class="card pfb" id="pfplaces" style="margin-top:0">Saved places</button>
   <p class="k" style="margin:22px 0 10px">Log backup</p>
   <div style="display:flex;gap:10px"><button class="ghost" id="lgex" style="margin:0;flex:1">Export</button><button class="ghost" id="lgim" style="margin:0;flex:1">Import</button></div>
   <input type="file" id="lgfile" accept="application/json,.json" hidden>
   <p class="note" id="lgnote" style="margin-top:10px"></p>
-</div></dialog>
+  <p class="note" style="margin-top:22px">Weather: Open-Meteo · Wildlife: iNaturalist · Maps: OpenStreetMap</p>
+</div>
+</main>
+<nav class="nav" aria-label="Main">
+  <button class="nb" data-v="today" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/></svg>Home</button>
+  <button class="nb" data-v="map" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>Spots</button>
+  <button class="nb" data-v="ins" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Insights</button>
+  <button class="nb" data-v="log" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M6 3v18M10 8h5M10 12h5"/></svg>Log</button>
+  <button class="nb" data-v="prof" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>Profile</button>
+</nav>
+
 <dialog id="lb" aria-label="Photo"><div class="dlg">
   <div class="dh"><div class="chips" style="margin:0;padding:0" role="group" aria-label="View"><button class="ch" id="lbt1" aria-pressed="true">Photo</button><button class="ch" id="lbt2" aria-pressed="false">About</button></div>
   <button id="lbx" class="ib" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -375,7 +506,7 @@ function moon(ds) {
 }
 
 async function load() {
-  $('#place').textContent = [place.name, place.region].filter(Boolean).join(', ');
+  $('#place').textContent = [place.name, place.region].filter(Boolean).join(', '); $('#wxPlace').textContent = place.name;
   updateStar();
   const key = 'wx:' + place.lat.toFixed(2) + ',' + place.lon.toFixed(2);
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${place.lat}&longitude=${place.lon}&timezone=auto&forecast_days=7&wind_speed_unit=kmh` +
@@ -458,6 +589,7 @@ function render() {
 
   $('#upd').textContent = note || 'Updated ' + c.time.slice(11, 16);
   renderPack();
+  renderHome({ c, D, i, today, s, why, w1, sr, ss, R });
 
   // day picker
   $('#days').innerHTML = D.time.map((t, k) => `<button class="day" data-k="${k}" aria-current="${k === i}"><span>${dayName(k)} <small>${new Date(t + 'T12:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}</small></span><span>${Math.round(D.temperature_2m_max[k])}° / ${Math.round(D.temperature_2m_min[k])}°</span><small>${wmo(D.weather_code[k])}</small><small class="r">Rain ${D.precipitation_probability_max[k]}%</small></button>`).join('');
@@ -713,9 +845,9 @@ document.querySelectorAll('#mchips button').forEach(b => b.onclick = () => {
 $('#msearch').onclick = () => map && loadCats();
 
 // themes
-const TH = [['auto', 'Auto', '#101912', '#F4ECD8', '#86C46F'], ['light', 'Light', '#D8CCB0', '#F4ECD8', '#8DBF68'], ['dark', 'Dark', '#101912', '#1A281B', '#86C46F'], ['season', 'Season (auto)', '#E4D3A6', '#52331C', '#E6903A'],
-  ['summer', 'Summer', '#E4D3A6', '#FBF4DE', '#6CC0A0'], ['autumn', 'Autumn', '#34200F', '#52331C', '#E6903A'], ['spring', 'Spring', '#C9DDB2', '#F3F8E6', '#E792A6'], ['winter', 'Winter', '#162230', '#22344A', '#8FD0EA']];
-let theme = 'dark'; try { theme = localStorage.getItem('theme') || 'dark'; } catch {}
+const TH = [['auto', 'Auto', '#F6F2E9', '#101912', '#1E5F44'], ['light', 'Light', '#F6F2E9', '#FFFFFF', '#1E5F44'], ['dark', 'Dark', '#101912', '#1A281B', '#86C46F'], ['season', 'Season (auto)', '#F8F1DC', '#F6EBDD', '#A5521F'],
+  ['summer', 'Summer', '#F8F1DC', '#FFFFFF', '#1B7A5E'], ['autumn', 'Autumn', '#F6EBDD', '#FFFFFF', '#A5521F'], ['spring', 'Spring', '#EEF5E4', '#FFFFFF', '#3F7B2D'], ['winter', 'Winter', '#E9F0F5', '#FFFFFF', '#2C6DA3']];
+let theme = 'light'; try { theme = localStorage.getItem('theme2') || 'light'; } catch {}
 const seasonOf = () => { const m = new Date().getMonth(); return m < 2 || m === 11 ? 'winter' : m < 5 ? 'spring' : m < 8 ? 'summer' : 'autumn'; };
 function applyTheme() {
   const k = theme === 'auto' ? (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : theme === 'season' ? seasonOf() : theme;
@@ -724,11 +856,11 @@ function applyTheme() {
   document.querySelectorAll('.th').forEach(b => b.setAttribute('aria-pressed', b.dataset.t === theme));
 }
 $('#thg').innerHTML = TH.map(([id, n, a, b, c]) => `<button class="th" data-t="${id}" aria-pressed="false"><span class="sws"><i style="background:${a}"></i><i style="background:${b}"></i><i style="background:${c}"></i></span>${n}</button>`).join('');
-$('#thg').addEventListener('click', e => { const b = e.target.closest('.th'); if (!b) return; theme = b.dataset.t; try { localStorage.setItem('theme', theme); } catch {} applyTheme(); });
+$('#thg').addEventListener('click', e => { const b = e.target.closest('.th'); if (!b) return; theme = b.dataset.t; try { localStorage.setItem('theme2', theme); } catch {} applyTheme(); });
 try { matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => theme === 'auto' && applyTheme()); } catch {}
 const closeDlg = d => { if (d.close) d.close(); else d.removeAttribute('open'); };
 const openDlg = d => { if (d.hasAttribute('open')) return; if (d.showModal) d.showModal(); else d.setAttribute('open', ''); };
-$('#gearBtn').onclick = () => openDlg($('#settings')); $('#stx').onclick = () => closeDlg($('#settings'));
+
 document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) closeDlg(d); }));
 applyTheme();
 
@@ -759,9 +891,9 @@ document.addEventListener('click', e => { const c = e.target.closest('.wc[data-i
 
 // fade between screens
 async function swapToday(job) {
-  const v = $('#viewToday'); v.classList.add('busy');
+  const vs = [$('#viewToday'), $('#viewWx')]; vs.forEach(v => v.classList.add('busy'));
   await new Promise(r => setTimeout(r, 180));
-  try { await job(); } finally { requestAnimationFrame(() => v.classList.remove('busy')); }
+  try { await job(); } finally { requestAnimationFrame(() => vs.forEach(v => v.classList.remove('busy'))); }
 }
 
 // saved places, like a phone weather app
@@ -902,17 +1034,114 @@ $('#lgfile').onchange = async e => {
   e.target.value = '';
 };
 
-// tabs
-const VIEWS = { today: '#viewToday', map: '#viewMap', pack: '#viewPack', wild: '#viewWild', log: '#viewLog' }, HASH = { map: 'map', pack: 'packing', wild: 'wildlife', log: 'log' };
+// ---- screens: weather scene, home, insights, profile ----
+const SV = p => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const ICO = { fish: SV('<path d="M3 12c4-6 12-6 16 0-4 6-12 6-16 0z"/><path d="M19 12l3-3v6z"/>'), gauge: SV('<path d="M4 16a8 8 0 0 1 16 0"/><path d="M12 16l4-5"/>'), pack: SV('<path d="M7 9a5 5 0 0 1 10 0v11H7z"/><path d="M9 14h6M10 4V3h4v1"/>'), map: SV('<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>') };
+let uname = ''; try { uname = localStorage.getItem('name') || ''; } catch {}
+let inp = 'month';
+const skyKind = c => c === 0 ? 'clear' : c <= 2 ? 'partly' : c === 3 ? 'cloud' : c <= 48 ? 'fog' : c <= 67 ? 'rain' : c <= 77 ? 'snow' : c <= 82 ? 'rain' : c <= 86 ? 'snow' : 'storm';
+
+function scene(kind, night, uid) {
+  const rain = kind === 'rain' || kind === 'storm', grey = rain || kind === 'snow' || kind === 'fog' || kind === 'cloud';
+  const sky = night ? ['#1E2F4D', '#3E557A'] : rain ? ['#8FA6B8', '#D5DEE4'] : grey ? ['#A9BAC8', '#E2E8EC'] : ['#79BFEF', '#E3F3F8'];
+  const cl = night ? '#5A6B8C' : grey ? '#A3B0BB' : '#FFFFFF';
+  const far = night ? '#2E4B46' : grey ? '#8FB59A' : '#A9D4A0', mid = night ? '#26403A' : grey ? '#6FA574' : '#7DBB77', wat = night ? '#274A6B' : grey ? '#5F8FB0' : '#4FA6DB';
+  const cloud = (x, y, k) => `<g fill="${cl}" transform="translate(${x} ${y}) scale(${k})"><ellipse cx="0" cy="10" rx="38" ry="13"/><circle cx="-14" cy="0" r="14"/><circle cx="6" cy="-7" r="18"/><circle cx="25" cy="2" r="12"/></g>`;
+  const pine = (x, y, k) => `<g transform="translate(${x} ${y}) scale(${k})"><rect x="-3" y="-4" width="6" height="12" fill="#6B4A2E"/><polygon points="0,-58 -17,-24 17,-24" fill="${night ? '#1F5A40' : '#2E7D4F'}"/><polygon points="0,-40 -21,-2 21,-2" fill="${night ? '#1A4D37' : '#276B43'}"/></g>`;
+  let o = `<svg viewBox="0 0 390 330" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="sk${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs><rect width="390" height="330" fill="url(#sk${uid})"/>`;
+  if (night) o += `<g fill="#fff" opacity=".8"><circle cx="40" cy="40" r="1.6"/><circle cx="110" cy="72" r="1.4"/><circle cx="180" cy="30" r="1.6"/><circle cx="240" cy="64" r="1.3"/><circle cx="350" cy="36" r="1.6"/><circle cx="70" cy="112" r="1.3"/></g><circle cx="300" cy="84" r="20" fill="#F4EEDC"/><circle cx="309" cy="77" r="18" fill="${sky[0]}"/>`;
+  else if (!grey) o += '<circle cx="300" cy="92" r="28" fill="#FFD257"/><g stroke="#FFE08A" stroke-width="4" stroke-linecap="round"><path d="M300 48v10M300 126v10M256 92h10M334 92h10M269 61l7 7M324 116l7 7M331 61l-7 7M276 116l-7 7"/></g>';
+  (kind === 'clear' ? [[92, 78, 1]] : kind === 'partly' ? [[92, 78, 1], [240, 140, .9]] : [[70, 64, 1.5], [215, 52, 1.6], [340, 96, 1.3]]).forEach(a => o += cloud(...a));
+  o += `<path d="M0 205Q70 150 150 190T290 175T390 195V260H0Z" fill="${far}"/><path d="M0 225Q90 190 190 220T390 215V270H0Z" fill="${mid}"/>` + pine(36, 222, 1) + pine(62, 232, .8) + pine(338, 214, .9) + pine(362, 224, 1.05);
+  o += '<rect x="100" y="206" width="40" height="28" fill="#C4432F"/><polygon points="96,206 120,186 144,206" fill="#7B2A22"/><rect x="114" y="214" width="12" height="20" fill="#fff"/><path d="M114 214l12 20M126 214l-12 20" stroke="#C4432F" stroke-width="1.5"/>';
+  o += `<path d="M0 236Q60 228 130 238T260 236T390 240V330H0Z" fill="${wat}"/><g stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45"><path d="M30 262h44M200 280h64M96 292h30M300 296h44M150 252h26"/></g>`;
+  o += '<rect x="228" y="244" width="162" height="12" fill="#B9824F"/><rect x="228" y="256" width="162" height="4" fill="#8A5A32"/><g fill="#8A5A32"><rect x="248" y="260" width="6" height="26"/><rect x="298" y="260" width="6" height="26"/><rect x="348" y="260" width="6" height="26"/></g><path d="M248 244v12M268 244v12M288 244v12M308 244v12M328 244v12M348 244v12M368 244v12" stroke="#8A5A32" stroke-width="1" opacity=".5"/>';
+  o += '<rect x="350" y="214" width="22" height="30" rx="8" fill="#E8843A"/><rect x="352" y="240" width="28" height="8" rx="4" fill="#3C5A8A"/><circle cx="361" cy="206" r="8" fill="#8A5B3C"/><ellipse cx="361" cy="200" rx="16" ry="4" fill="#EBC56B"/><path d="M353 200Q361 186 369 200Z" fill="#EBC56B"/>';
+  o += '<path d="M352 226L262 176" stroke="#5A3B22" stroke-width="2.2" stroke-linecap="round"/><path d="M262 176V268" stroke="#fff" stroke-width="1" opacity=".85"/><circle cx="262" cy="268" r="4" fill="#E5493A"/><ellipse cx="262" cy="271" rx="13" ry="4" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/>';
+  if (!rain) o += '<path d="M160 272q10-24 26-6q-8 13-26 6z" fill="#EAF4FA"/><path d="M186 266l9-7v14z" fill="#EAF4FA"/><g fill="#fff" opacity=".8"><circle cx="150" cy="262" r="2"/><circle cx="198" cy="270" r="2"/></g>';
+  if (kind === 'fog') o += '<rect y="170" width="390" height="130" fill="#fff" opacity=".35"/>';
+  if (rain || kind === 'snow') { let s = 7, g = ''; for (let i = 0; i < 46; i++) { s = (s * 73 + 41) % 997; const x = s % 390, y = (s * 7) % 300; g += rain ? `M${x} ${y}l-5 14` : `M${x} ${y}h.1`; } o += `<path d="${g}" stroke="#EAF2F8" stroke-width="${rain ? 1.5 : 4}" stroke-linecap="round" opacity=".75"/>`; }
+  return o + '</svg>';
+}
+
+function renderHome({ c, D, i, today, s, why, w1, sr, ss, R }) {
+  const code = today ? c.weather_code : D.weather_code[i], nowT = new Date(c.time), night = today && (nowT < sr || nowT > ss);
+  $('#scHome').innerHTML = scene(skyKind(code), night, 'h'); $('#scWx').innerHTML = scene(skyKind(code), night, 'w');
+  $('#heroW').classList.toggle('night', night);
+  const hr = nowT.getHours();
+  $('#hello').textContent = (hr < 5 ? 'Good night' : hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ', ' + (uname || 'angler');
+  $('#ring').style.strokeDasharray = (s / 10 * 138.2).toFixed(1) + ' 138.2'; $('#ringn').textContent = s;
+  $('#hlabel').textContent = s < 4 ? 'Poor' : s < 6 ? 'Fair' : s < 8 ? 'Good' : 'Excellent'; $('#hwhy').textContent = why.slice(0, 2).join(' · ');
+  const temp = today ? Math.round(c.temperature_2m) : Math.round(D.temperature_2m_max[i]), rainMax = Math.max(...R);
+  $('#hTemp').textContent = temp + '°'; $('#hCond').textContent = wmo(code); $('#hRain').textContent = rainMax + '% rain';
+  $('#hWind').textContent = Math.round(today ? c.wind_speed_10m : D.wind_speed_10m_max[i]) + ' km/h';
+  $('#sxPr').textContent = Math.round(today ? c.pressure_msl : avg(data.hourly.pressure_msl.slice(i * 24, i * 24 + 24)));
+  const m = moon(D.time[i]); $('#sxMo').textContent = m.pct + '%'; $('#sxMoN').textContent = m.name;
+  $('#qaTime').textContent = hm(w1[0]); $('#qaTimeS').textContent = `Dawn ${hm(w1[0])} to ${hm(w1[1])}`;
+  $('#qaWx').textContent = temp + '°'; $('#qaWxS').textContent = 'Rain up to ' + rainMax + '% ' + (today ? 'today' : 'that day');
+  homeBits(); renderSpots();
+}
+function homeBits() {
+  if (!data) return;
+  const yr = new Date().getFullYear(), L = logs || [];
+  $('#sxCatch').textContent = L.filter(e => e.species && new Date(e.ts).getFullYear() === yr).length;
+  $('#sxSp').textContent = new Set(L.map(e => (e.species || '').trim().toLowerCase()).filter(Boolean)).size;
+  const W = Array.isArray(wild) ? wild : [];
+  $('#qaWild').textContent = W.length ? W.length + ' seen' : '–';
+  $('#qaWildS').textContent = W.length ? W.slice(0, 3).map(r => cap(r.taxon.preferred_common_name || r.taxon.name)).join(', ') : 'Animals and fish near you';
+  const s = st(), rows = [...(curSug || []).map(x => ({ t: x[0], hint: x[1] })), ...s.items.map(x => ({ t: x.t, hint: '' }))], seen = new Set();
+  const list = rows.filter(r => { const k = r.t.toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; });
+  const left = list.filter(r => !s.done[r.t.toLowerCase()]), done = list.length - left.length;
+  $('#qaPack').textContent = done + '/' + list.length; $('#qaPackS').textContent = left.length ? left.slice(0, 2).map(r => r.t).join(', ') + ' left' : 'All packed';
+  $('#hckN').textContent = `${done} of ${list.length} packed`; $('#hckB').style.width = list.length ? (done / list.length * 100) + '%' : '0';
+  $('#hck').innerHTML = left.slice(0, 3).map(r => `<label class="hck"><input type="checkbox" data-hk="${esc(r.t.toLowerCase())}"><span>${esc(r.t)}</span><em>${esc(r.hint)}</em></label>`).join('') || '<p class="empty" style="margin:12px 0 0">Everything is packed</p>';
+}
+$('#hck').addEventListener('change', e => { const k = e.target.dataset && e.target.dataset.hk; if (k === undefined) return; const s = st(); if (e.target.checked) s.done[k] = true; else delete s.done[k]; savePack(); renderPack(); });
+function renderSpots() {
+  const mini = k => { const p = [['#79BFEF', '#A9D4A0', '#4FA6DB'], ['#F5C48A', '#B9CF8E', '#6AA6C4'], ['#9FB8D8', '#9CC2A4', '#5E8FB8']][k % 3]; return `<svg width="210" height="96" viewBox="0 0 236 104" aria-hidden="true"><rect width="236" height="104" fill="${p[0]}"/><path d="M0 52Q50 28 110 48T236 40V70H0Z" fill="${p[1]}"/><path d="M0 62Q70 52 140 62T236 60V104H0Z" fill="${p[2]}"/><polygon points="30,50 20,72 40,72" fill="#2E7D4F"/><polygon points="196,44 184,70 208,70" fill="#2E7D4F"/><rect x="140" y="62" width="96" height="8" fill="#B9824F"/><rect x="66" y="48" width="22" height="14" fill="#C4432F"/><polygon points="64,48 77,38 90,48" fill="#7B2A22"/></svg>`; };
+  const list = saved.length ? saved : [place];
+  $('#hsp').innerHTML = list.map((x, k) => `<button class="card hspc" data-spot="${k}">${mini(k)}<span><b>${esc(x.name)}</b><small>${esc(x.region || (saved.length ? '' : 'Tap the star to save this spot'))}</small></span></button>`).join('');
+}
+$('#hsp').addEventListener('click', e => { const b = e.target.closest('[data-spot]'); if (!b) return; const x = (saved.length ? saved : [place])[+b.dataset.spot]; if (x && !near(x, place)) setPlace({ name: x.name, region: x.region || '', lat: x.lat, lon: x.lon }); });
+
+document.querySelectorAll('#inper button').forEach(b => b.onclick = () => { inp = b.dataset.p; document.querySelectorAll('#inper button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderIns(); });
+async function renderIns() {
+  try { logs = (await logAll()).sort((a, b) => b.ts - a.ts); } catch { logs = []; }
+  const now = Date.now(), span = { week: 7, month: 30, year: 365 }[inp] * 864e5;
+  const L = logs.filter(e => now - e.ts <= span), Pv = logs.filter(e => now - e.ts > span && now - e.ts <= 2 * span);
+  const fish = a => a.filter(e => e.species).length, trips = a => new Set(a.map(e => new Date(e.ts).toDateString())).size, mx = (a, k) => Math.max(0, ...a.map(e => +e[k] || 0));
+  const dl = (a, b) => a === b ? '' : (a > b ? '+' : '−') + Math.abs(a - b), card = (ic, cl, label, val, d) => `<div class="card hsx"><span class="hico ${cl}">${ic}</span><b>${val}</b><span>${label}${d ? ' · ' + d + ' vs before' : ''}</span></div>`;
+  $('#instats').innerHTML = card(ICO.fish, 'hc-g', 'Catches', fish(L), dl(fish(L), fish(Pv))) + card(ICO.gauge, 'hc-t', 'Biggest', mx(L, 'len') ? mx(L, 'len') + ' cm' : '–', '') + card(ICO.pack, 'hc-b', 'Heaviest', mx(L, 'wt') ? mx(L, 'wt') + ' kg' : '–', '') + card(ICO.map, 'hc-s', 'Trips', trips(L), dl(trips(L), trips(Pv)));
+  const mo = []; for (let k = 11; k >= 0; k--) { const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - k); mo.push({ y: d.getFullYear(), m: d.getMonth() }); }
+  const cnt = mo.map(x => logs.filter(e => { const d = new Date(e.ts); return d.getFullYear() === x.y && d.getMonth() === x.m; }).length), top = Math.max(1, ...cnt);
+  $('#inbars').innerHTML = mo.map((x, k) => `<div class="${k === 11 ? 'on' : ''}"><i style="height:${Math.max(4, cnt[k] / top * 100)}px" title="${cnt[k]}"></i><span>${'JFMAMJJASOND'[x.m]}</span></div>`).join('');
+  const src = L.some(e => e.species) ? L : logs, by = {}; src.forEach(e => { if (e.species) { const k = e.species.trim(); by[k] = (by[k] || 0) + 1; } });
+  const rows = Object.entries(by).sort((a, b) => b[1] - a[1]).slice(0, 5), tot = rows.reduce((a, r) => a + r[1], 0) || 1, col = ['#2F8F5B', '#E8A33A', '#E4632F', '#3A8FD9', '#8A6BC4'];
+  $('#insp').innerHTML = rows.length ? rows.map(([n, c], k) => `<div class="spb"><div><b>${esc(n)}</b><span>${c} · ${Math.round(c / tot * 100)}%</span></div><i><u style="width:${c / rows[0][1] * 100}%;background:${col[k % 5]}"></u></i></div>`).join('') : '<p class="empty" style="margin:10px 0 0">No catches logged yet</p>';
+  const hrs = logs.filter(e => e.species).map(e => new Date(e.ts).getHours()), tip = $('#intip');
+  if (hrs.length >= 3) { let best = 0, bs = 0; for (let h = 0; h < 24; h++) { const n = hrs.filter(x => x === h || x === (h + 1) % 24).length; if (n > best) { best = n; bs = h; } } tip.hidden = false; tip.innerHTML = `<b>Smart tip</b><p>${best} of your ${hrs.length} catches came between ${String(bs).padStart(2, '0')}:00 and ${String((bs + 2) % 24).padStart(2, '0')}:00.</p>`; } else tip.hidden = true;
+}
+function renderProf() { $('#pname').value = uname; $('#pfav').textContent = (uname || 'A').charAt(0).toUpperCase(); }
+$('#pname').addEventListener('input', e => { uname = e.target.value.trim().slice(0, 24); try { localStorage.setItem('name', uname); } catch {} $('#pfav').textContent = (uname || 'A').charAt(0).toUpperCase(); const h = $('#hello'); h.textContent = h.textContent.replace(/,.*$/, '') + ', ' + (uname || 'angler'); });
+$('#pfplaces').onclick = openPlaces;
+async function refreshLogs() { try { logs = (await logAll()).sort((a, b) => b.ts - a.ts); } catch { logs = []; } homeBits(); }
+
+// tabs and sub-screens
+const VIEWS = { today: '#viewToday', wx: '#viewWx', map: '#viewMap', ins: '#viewIns', log: '#viewLog', prof: '#viewProf', pack: '#viewPack', wild: '#viewWild' };
+const HASH = { wx: 'weather', map: 'spots', ins: 'insights', log: 'log', prof: 'profile', pack: 'packing', wild: 'wildlife' };
+const TABOF = { today: 'today', wx: 'today', pack: 'today', wild: 'today', map: 'map', ins: 'ins', log: 'log', prof: 'prof' };
 function show(v) {
   Object.entries(VIEWS).forEach(([k, sel]) => $(sel).hidden = k !== v);
-  document.querySelectorAll('.nb').forEach(b => b.setAttribute('aria-current', b.dataset.v === v ? 'page' : 'false'));
+  document.querySelectorAll('.nb').forEach(b => b.setAttribute('aria-current', b.dataset.v === TABOF[v] ? 'page' : 'false'));
   if (v === 'map') { $('#msub').textContent = 'Around ' + place.name; initMap(); if (map) setTimeout(() => map.invalidateSize(), 60); }
   if (v === 'wild') loadWild();
   if (v === 'log') renderLog();
+  if (v === 'ins') renderIns();
+  if (v === 'prof') renderProf();
   history.replaceState(null, '', v === 'today' ? location.pathname : '#' + HASH[v]); scrollTo(0, 0);
 }
 document.querySelectorAll('.nb').forEach(b => b.onclick = () => show(b.dataset.v));
+document.addEventListener('click', e => { const g = e.target.closest('[data-to]'); if (g) return show(g.dataset.to); if (e.target.closest('[data-back]')) show('today'); });
 { const h = Object.keys(HASH).find(k => '#' + HASH[k] === location.hash); if (h) show(h); }
 
 // drawer
@@ -947,7 +1176,9 @@ $('#q').addEventListener('input', e => {
 });
 document.addEventListener('click', e => { if (!e.target.closest('.top')) box.hidden = true; });
 document.addEventListener('visibilitychange', () => { if (!document.hidden && data) { const d = day; load().then(() => { day = d; render(); }); } });
+{ const rp = renderPack, rw = renderWild, rl = renderLog, us = updateStar; renderPack = () => { rp(); homeBits(); }; renderWild = () => { rw(); homeBits(); }; renderLog = async () => { await rl(); homeBits(); }; updateStar = () => { us(); renderSpots(); }; }
 load();
+refreshLogs();
 </script>
 </body>
 </html>
