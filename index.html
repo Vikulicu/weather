@@ -273,6 +273,72 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .fl2{flex:1;display:block}.fl2 small{display:block;color:var(--mute);font-size:12px;margin-bottom:4px}
 .fl2 input{width:100%;height:44px;border-radius:14px;border:0;background:var(--bg);color:var(--ink);padding:0 14px;font:inherit;font-size:16px}
 .pfb{display:block;width:100%;text-align:left;border:0;font:700 15px var(--sans);color:var(--ink)}
+/* ===== layout tweaks + motion ===== */
+:root{--well:color-mix(in srgb,var(--bg),var(--ink) 9%);--moondark:#9AA6B2}
+:root[data-theme=dark]{--well:color-mix(in srgb,var(--bg),#fff 10%);--moondark:#2E3A33}
+.hero{height:350px}
+.hero-wx{height:390px}
+.pull{margin-top:-44px}
+.hduo>button{padding:12px 14px}
+.hwx{display:block}
+.hwx small{display:block;color:var(--mute);font-size:12px;font-weight:600}
+.hwx .r1{display:flex;align-items:baseline;gap:8px}
+.hwx b{font-size:26px;font-weight:800;line-height:1.1}
+#hCond{font-size:13px;color:var(--mute)}
+.hwx .pp{display:none}
+.hring{gap:10px}.hring b{font-size:17px}
+.logb{display:flex;align-items:center;gap:6px;background:var(--card);border:0;border-radius:999px;padding:0 16px;min-height:44px;box-shadow:0 4px 14px var(--shadow);font:700 14px var(--sans);color:var(--ink)}
+.emptyc{display:flex;gap:14px;align-items:center;margin-top:18px}.emptyc b{display:block;font-size:16px}.emptyc small{color:var(--mute);font-size:13px}
+/* screen + item entrances */
+#viewToday,#viewMap,#viewPack,#viewWild,#viewLog,#viewWx,#viewIns,#viewProf,#viewFeed{animation:none}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes reveal{from{clip-path:circle(0 at var(--cx,90%) var(--cy,8%))}to{clip-path:circle(160% at var(--cx,90%) var(--cy,8%))}}
+@keyframes popin{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes sheetup{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+.swp{animation:fadeup .32s ease-out backwards!important}
+.rev{animation:reveal .65s cubic-bezier(.3,.7,.2,1) backwards!important}
+.pop{animation:popin .55s cubic-bezier(.2,.9,.25,1.1) backwards;animation-delay:calc(var(--i,0) * 60ms)}
+.sheet{animation:sheetup .6s cubic-bezier(.2,.8,.2,1) .12s backwards}
+.nb,.nb svg{transition:color .2s,transform .2s}.nb[aria-current=page] svg{transform:translateY(-2px)}
+/* the living lake scene */
+@keyframes spop{from{opacity:0;transform:translateY(14px) scale(.6)}to{opacity:1;transform:none}}
+@keyframes srise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes sway{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+@keyframes sway2{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(.8deg)}}
+@keyframes drift{0%,100%{transform:translateX(-14px)}50%{transform:translateX(14px)}}
+@keyframes wave{0%,100%{transform:translateX(-9px)}50%{transform:translateX(9px)}}
+@keyframes rodsway{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@keyframes ripple{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+@keyframes jump{0%,58%{opacity:0;transform:translate(0,16px) rotate(0)}60%{opacity:1;transform:translate(0,6px) rotate(-20deg)}70%{opacity:1;transform:translate(-14px,-34px) rotate(-45deg)}80%{opacity:1;transform:translate(-30px,-8px) rotate(35deg)}85%,100%{opacity:0;transform:translate(-36px,14px) rotate(60deg)}}
+@keyframes splash{0%,58%{opacity:0;transform:scale(.2)}62%{opacity:.9;transform:scale(1)}74%{opacity:0;transform:scale(1.9)}80%{opacity:0;transform:scale(.2)}82%{opacity:.8;transform:scale(1)}92%,100%{opacity:0;transform:scale(1.9)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes fly{from{transform:translate(-60px,0)}50%{transform:translate(200px,-14px)}to{transform:translate(460px,6px)}}
+@keyframes flap{0%{transform:scaleY(1)}100%{transform:scaleY(.45)}}
+@keyframes rainfall{to{stroke-dashoffset:-28}}
+@keyframes flake{0%{transform:translate(0,-8px);opacity:0}15%{opacity:.9}85%{opacity:.9}100%{transform:translate(14px,72px);opacity:0}}
+.scene .sp,.scene .rise,.scene .sway,.scene .sway2,.scene .drift,.scene .wave,.scene .bob,.scene .ring2,.scene .fish,.scene .splash,.scene .pulse,.scene .flap,.scene .fogd{transform-box:fill-box;transform-origin:50% 100%}
+.scene.play .sp{animation:spop .7s cubic-bezier(.2,1.2,.3,1) var(--d,0s) backwards}
+.scene.play .rise{animation:srise .8s cubic-bezier(.2,.8,.2,1) var(--d,0s) backwards}
+.scene .sway{animation:sway 5s ease-in-out infinite}
+.scene .sway2{animation:sway2 4s ease-in-out infinite}
+.scene .drift,.scene .fogd{transform-origin:50% 50%;animation:drift 16s ease-in-out infinite}
+.scene .wave{transform-origin:50% 50%;animation:wave 6s ease-in-out infinite}
+.scene .rod{transform-box:view-box;transform-origin:352px 226px;animation:rodsway 4.5s ease-in-out infinite}
+.scene .bob{animation:bob 2.6s ease-in-out infinite}
+.scene .ring2{transform-origin:50% 50%;animation:ripple 2.6s ease-out infinite}
+.scene .fish{transform-origin:50% 50%;opacity:0;animation:jump 7s ease-in-out infinite}
+.scene .splash{transform-origin:50% 50%;opacity:0;animation:splash 7s ease-out infinite}
+.scene .sunrot{transform-box:view-box;transform-origin:300px 92px;animation:spin 60s linear infinite}
+.scene .pulse{transform-origin:50% 50%;animation:pulse 4s ease-in-out infinite}
+.scene .tw{animation:tw 3s ease-in-out infinite}
+.scene .bird{animation:fly 28s linear infinite}
+.scene .flap{transform-origin:50% 50%;animation:flap .5s ease-in-out infinite alternate}
+.scene .rain{stroke-dasharray:6 22;animation:rainfall .6s linear infinite}
+.scene .flake{animation:flake 6s linear infinite}
+@media (prefers-reduced-motion:reduce){.scene *,.pop,.rev,.swp,.sheet{animation:none!important}}
 </style>
 
 </head>
@@ -293,8 +359,8 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
   </section>
   <div class="pull">
     <div class="hduo">
-      <button class="card hring" data-to="wx" aria-label="Open the fishing outlook"><svg width="56" height="56" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke="var(--line)" stroke-width="6"/><circle id="ring" cx="28" cy="28" r="22" fill="none" stroke="var(--leaf)" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 138.2" transform="rotate(-90 28 28)" style="transition:stroke-dasharray .6s"/><text id="ringn" x="28" y="34" text-anchor="middle" font-size="18" font-weight="800" fill="currentColor">–</text></svg><span><small>Fishing score</small><b id="hlabel">–</b><em id="hwhy"></em></span></button>
-      <button class="card hwx" data-to="wx" aria-label="Open the weather"><b id="hTemp">–</b><small id="hCond"></small><span class="pp"><i class="hpill hc-b" id="hRain">–</i><i class="hpill hc-g" id="hWind">–</i></span></button>
+      <button class="card hwx" data-to="wx" aria-label="Open the weather"><small>Weather</small><span class="r1"><b id="hTemp">–</b><span id="hCond"></span></span><span class="pp"><i class="hpill hc-b" id="hRain">–</i><i class="hpill hc-g" id="hWind">–</i></span></button>
+      <button class="card hring" data-to="wx" aria-label="Open the fishing outlook"><svg width="44" height="44" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke="var(--line)" stroke-width="6"/><circle id="ring" cx="28" cy="28" r="22" fill="none" stroke="var(--leaf)" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 138.2" transform="rotate(-90 28 28)" style="transition:stroke-dasharray .6s"/><text id="ringn" x="28" y="34" text-anchor="middle" font-size="18" font-weight="800" fill="currentColor">–</text></svg><span><small>Fishing score</small><b id="hlabel">–</b><em id="hwhy" hidden></em></span></button>
     </div>
     <h2 class="hh">Quick stats</h2>
     <div class="hsg">
@@ -311,7 +377,7 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
       <button class="hqr" data-to="pack"><span class="hico hc-g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9a5 5 0 0 1 10 0v11H7z"/><path d="M9 14h6M10 4V3h4v1"/></svg></span><span class="hq"><b>Packing list</b><small id="qaPackS">–</small></span><i class="hpill hc-g" id="qaPack">–</i></button>
     </div>
     <div class="hhr"><h2 class="hh">Trip checklist</h2><button class="lnk" data-to="pack">See all</button></div>
-    <div class="card" style="margin-top:0"><span class="hs2" id="hckN"></span><div class="pbar"><div id="hckB" style="width:0"></div></div><div id="hck"></div></div>
+    <div class="card" id="hckCard" style="margin-top:0"><span class="hs2" id="hckN"></span><div class="pbar"><div id="hckB" style="width:0"></div></div><div id="hck"></div></div>
     <h2 class="hh">My spots</h2>
     <div class="hsp" id="hsp"></div>
     <div id="wpre" hidden><div id="wpg"></div><button id="wall" hidden></button></div>
@@ -332,20 +398,6 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
     <div class="row" style="align-items:center"><h2>Conditions</h2><span class="hpill hc-g" id="dayline"></span></div>
     <div id="details"></div>
     <section class="card">
-    <p class="k">Sunrise and sunset</p>
-    <div class="row" style="align-items:center">
-      <div><span class="d">Sunrise</span><div class="t30" id="rise">–</div></div>
-      <svg width="104" height="60" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 54A54 54 0 0 1 114 54" fill="none" style="stroke:var(--stitch)" stroke-width="3" stroke-dasharray="3 5"/><path d="M0 54h120" style="stroke:var(--stitch)" stroke-width="2"/><circle id="sundot" cx="60" cy="0" r="6" style="fill:var(--tan)" hidden/></svg>
-      <div style="text-align:right"><span class="d">Sunset</span><div class="t30" id="set">–</div></div>
-    </div>
-    <p class="sub" id="daylight" style="margin-top:12px"></p>
-    <div style="display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
-      <span id="moonsvg"></span>
-      <div><p id="moonname" style="margin:0;font-weight:500"></p><p class="sub" id="moonsub" style="margin:0;font-size:13px"></p></div>
-    </div>
-  </section>
-
-  <section class="card">
     <p class="k">Hourly: temperature and rain chance</p>
     <div class="hs" id="hours"></div>
   </section>
@@ -362,6 +414,20 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
   </section>
 
   
+  <section class="card">
+    <p class="k">Sunrise and sunset</p>
+    <div class="row" style="align-items:center">
+      <div><span class="d">Sunrise</span><div class="t30" id="rise">–</div></div>
+      <svg width="104" height="60" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 54A54 54 0 0 1 114 54" fill="none" style="stroke:var(--stitch)" stroke-width="3" stroke-dasharray="3 5"/><path d="M0 54h120" style="stroke:var(--stitch)" stroke-width="2"/><circle id="sundot" cx="60" cy="0" r="6" style="fill:var(--tan)" hidden/></svg>
+      <div style="text-align:right"><span class="d">Sunset</span><div class="t30" id="set">–</div></div>
+    </div>
+    <p class="sub" id="daylight" style="margin-top:12px"></p>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+      <span id="moonsvg"></span>
+      <div><p id="moonname" style="margin:0;font-weight:500"></p><p class="sub" id="moonsub" style="margin:0;font-size:13px"></p></div>
+    </div>
+  </section>
+
   </div>
 </div>
 <div id="viewPack" hidden>
@@ -397,15 +463,14 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
   <p class="note" id="wstat" style="margin-top:12px"></p>
 </div>
 <div id="viewLog" hidden>
-  <h1>Log</h1>
+  <div class="sh"><button class="ib" data-back="ins" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h1>Log</h1></div>
   <div class="stats" id="lgstats"></div>
   <button class="pri" id="lgnew" style="width:100%;margin-top:16px">New entry</button>
   <p class="note" id="lgerr" style="margin-top:10px" hidden>Entries can’t be saved in this browser. Private windows block it.</p>
   <div id="lglist"></div>
 </div>
 <div id="viewIns" hidden>
-  <h1>Insights</h1>
-  <p class="sub">Your fishing</p>
+  <div class="row" style="align-items:flex-start"><div><h1>Insights</h1><p class="sub">Your fishing</p></div><button class="logb" data-to="log"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M6 3v18M10 8h5M10 12h5"/></svg>Log</button></div>
   <div class="per" id="inper" role="group" aria-label="Period"><button data-p="week" aria-pressed="false">Week</button><button data-p="month" aria-pressed="true">Month</button><button data-p="year" aria-pressed="false">Year</button></div>
   <div class="hsg" id="instats" style="margin-top:14px"></div>
   <section class="card"><p class="k" style="margin:0">Catches per month</p><div class="bars" id="inbars"></div></section>
@@ -425,12 +490,16 @@ dialog{background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
   <p class="note" id="lgnote" style="margin-top:10px"></p>
   <p class="note" style="margin-top:22px">Weather: Open-Meteo · Wildlife: iNaturalist · Maps: OpenStreetMap</p>
 </div>
+<div id="viewFeed" hidden>
+  <h1>Feed</h1>
+  <section class="card emptyc"><span class="hico hc-g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Feed is coming soon</b><small>Posts and photos from you and your friends will show up here.</small></span></section>
+</div>
 </main>
 <nav class="nav" aria-label="Main">
   <button class="nb" data-v="today" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/></svg>Home</button>
   <button class="nb" data-v="map" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>Spots</button>
   <button class="nb" data-v="ins" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-9M12 20V4M19 20v-6"/></svg>Insights</button>
-  <button class="nb" data-v="log" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h11a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6z"/><path d="M6 3v18M10 8h5M10 12h5"/></svg>Log</button>
+  <button class="nb" data-v="feed" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Feed</button>
   <button class="nb" data-v="prof" aria-current="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>Profile</button>
 </nav>
 
@@ -893,7 +962,7 @@ document.addEventListener('click', e => { const c = e.target.closest('.wc[data-i
 async function swapToday(job) {
   const vs = [$('#viewToday'), $('#viewWx')]; vs.forEach(v => v.classList.add('busy'));
   await new Promise(r => setTimeout(r, 180));
-  try { await job(); } finally { requestAnimationFrame(() => vs.forEach(v => v.classList.remove('busy'))); }
+  try { await job(); } finally { requestAnimationFrame(() => { vs.forEach(v => v.classList.remove('busy')); enter(curView); }); }
 }
 
 // saved places, like a phone weather app
@@ -1042,44 +1111,49 @@ let inp = 'month';
 const skyKind = c => c === 0 ? 'clear' : c <= 2 ? 'partly' : c === 3 ? 'cloud' : c <= 48 ? 'fog' : c <= 67 ? 'rain' : c <= 77 ? 'snow' : c <= 82 ? 'rain' : c <= 86 ? 'snow' : 'storm';
 
 function scene(kind, night, uid) {
-  const rain = kind === 'rain' || kind === 'storm', grey = rain || kind === 'snow' || kind === 'fog' || kind === 'cloud';
+  const rain = kind === 'rain' || kind === 'storm', snow = kind === 'snow', grey = rain || snow || kind === 'fog' || kind === 'cloud';
   const sky = night ? ['#1E2F4D', '#3E557A'] : rain ? ['#8FA6B8', '#D5DEE4'] : grey ? ['#A9BAC8', '#E2E8EC'] : ['#79BFEF', '#E3F3F8'];
   const cl = night ? '#5A6B8C' : grey ? '#A3B0BB' : '#FFFFFF';
   const far = night ? '#2E4B46' : grey ? '#8FB59A' : '#A9D4A0', mid = night ? '#26403A' : grey ? '#6FA574' : '#7DBB77', wat = night ? '#274A6B' : grey ? '#5F8FB0' : '#4FA6DB';
-  const cloud = (x, y, k) => `<g fill="${cl}" transform="translate(${x} ${y}) scale(${k})"><ellipse cx="0" cy="10" rx="38" ry="13"/><circle cx="-14" cy="0" r="14"/><circle cx="6" cy="-7" r="18"/><circle cx="25" cy="2" r="12"/></g>`;
-  const pine = (x, y, k) => `<g transform="translate(${x} ${y}) scale(${k})"><rect x="-3" y="-4" width="6" height="12" fill="#6B4A2E"/><polygon points="0,-58 -17,-24 17,-24" fill="${night ? '#1F5A40' : '#2E7D4F'}"/><polygon points="0,-40 -21,-2 21,-2" fill="${night ? '#1A4D37' : '#276B43'}"/></g>`;
+  const sp = (d, x, c = 'sp') => `<g class="${c}" style="--d:${d}s">${x}</g>`;
+  const cloud = (x, y, k, n) => `<g transform="translate(${x} ${y}) scale(${k})"><g class="drift" style="animation-duration:${14 + n * 6}s;animation-delay:-${n * 5}s" fill="${cl}"><ellipse cx="0" cy="10" rx="38" ry="13"/><circle cx="-14" cy="0" r="14"/><circle cx="6" cy="-7" r="18"/><circle cx="25" cy="2" r="12"/></g></g>`;
+  const pine = (x, y, k, n) => `<g transform="translate(${x} ${y}) scale(${k})"><g class="sway" style="animation-delay:-${n * 1.3}s"><rect x="-3" y="-4" width="6" height="12" fill="#6B4A2E"/><polygon points="0,-58 -17,-24 17,-24" fill="${night ? '#1F5A40' : '#2E7D4F'}"/><polygon points="0,-40 -21,-2 21,-2" fill="${night ? '#1A4D37' : '#276B43'}"/></g></g>`;
   let o = `<svg viewBox="0 0 390 330" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="sk${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset="1" stop-color="${sky[1]}"/></linearGradient></defs><rect width="390" height="330" fill="url(#sk${uid})"/>`;
-  if (night) o += `<g fill="#fff" opacity=".8"><circle cx="40" cy="40" r="1.6"/><circle cx="110" cy="72" r="1.4"/><circle cx="180" cy="30" r="1.6"/><circle cx="240" cy="64" r="1.3"/><circle cx="350" cy="36" r="1.6"/><circle cx="70" cy="112" r="1.3"/></g><circle cx="300" cy="84" r="20" fill="#F4EEDC"/><circle cx="309" cy="77" r="18" fill="${sky[0]}"/>`;
-  else if (!grey) o += '<circle cx="300" cy="92" r="28" fill="#FFD257"/><g stroke="#FFE08A" stroke-width="4" stroke-linecap="round"><path d="M300 48v10M300 126v10M256 92h10M334 92h10M269 61l7 7M324 116l7 7M331 61l-7 7M276 116l-7 7"/></g>';
-  (kind === 'clear' ? [[92, 78, 1]] : kind === 'partly' ? [[92, 78, 1], [240, 140, .9]] : [[70, 64, 1.5], [215, 52, 1.6], [340, 96, 1.3]]).forEach(a => o += cloud(...a));
-  o += `<path d="M0 205Q70 150 150 190T290 175T390 195V260H0Z" fill="${far}"/><path d="M0 225Q90 190 190 220T390 215V270H0Z" fill="${mid}"/>` + pine(36, 222, 1) + pine(62, 232, .8) + pine(338, 214, .9) + pine(362, 224, 1.05);
-  o += '<rect x="100" y="206" width="40" height="28" fill="#C4432F"/><polygon points="96,206 120,186 144,206" fill="#7B2A22"/><rect x="114" y="214" width="12" height="20" fill="#fff"/><path d="M114 214l12 20M126 214l-12 20" stroke="#C4432F" stroke-width="1.5"/>';
-  o += `<path d="M0 236Q60 228 130 238T260 236T390 240V330H0Z" fill="${wat}"/><g stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45"><path d="M30 262h44M200 280h64M96 292h30M300 296h44M150 252h26"/></g>`;
-  o += '<rect x="228" y="244" width="162" height="12" fill="#B9824F"/><rect x="228" y="256" width="162" height="4" fill="#8A5A32"/><g fill="#8A5A32"><rect x="248" y="260" width="6" height="26"/><rect x="298" y="260" width="6" height="26"/><rect x="348" y="260" width="6" height="26"/></g><path d="M248 244v12M268 244v12M288 244v12M308 244v12M328 244v12M348 244v12M368 244v12" stroke="#8A5A32" stroke-width="1" opacity=".5"/>';
-  o += '<rect x="350" y="214" width="22" height="30" rx="8" fill="#E8843A"/><rect x="352" y="240" width="28" height="8" rx="4" fill="#3C5A8A"/><circle cx="361" cy="206" r="8" fill="#8A5B3C"/><ellipse cx="361" cy="200" rx="16" ry="4" fill="#EBC56B"/><path d="M353 200Q361 186 369 200Z" fill="#EBC56B"/>';
-  o += '<path d="M352 226L262 176" stroke="#5A3B22" stroke-width="2.2" stroke-linecap="round"/><path d="M262 176V268" stroke="#fff" stroke-width="1" opacity=".85"/><circle cx="262" cy="268" r="4" fill="#E5493A"/><ellipse cx="262" cy="271" rx="13" ry="4" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/>';
-  if (!rain) o += '<path d="M160 272q10-24 26-6q-8 13-26 6z" fill="#EAF4FA"/><path d="M186 266l9-7v14z" fill="#EAF4FA"/><g fill="#fff" opacity=".8"><circle cx="150" cy="262" r="2"/><circle cx="198" cy="270" r="2"/></g>';
-  if (kind === 'fog') o += '<rect y="170" width="390" height="130" fill="#fff" opacity=".35"/>';
-  if (rain || kind === 'snow') { let s = 7, g = ''; for (let i = 0; i < 46; i++) { s = (s * 73 + 41) % 997; const x = s % 390, y = (s * 7) % 300; g += rain ? `M${x} ${y}l-5 14` : `M${x} ${y}h.1`; } o += `<path d="${g}" stroke="#EAF2F8" stroke-width="${rain ? 1.5 : 4}" stroke-linecap="round" opacity=".75"/>`; }
+  if (night) o += '<g fill="#fff">' + [[40, 40], [110, 72], [180, 30], [240, 64], [350, 36], [70, 112]].map((p, i) => `<circle class="tw" style="animation-delay:-${i * .7}s" cx="${p[0]}" cy="${p[1]}" r="1.6"/>`).join('') + '</g>' + sp(.05, `<circle cx="300" cy="84" r="20" fill="#F4EEDC"/><circle cx="309" cy="77" r="18" fill="${sky[0]}"/>`);
+  else if (!grey) o += sp(.05, '<g class="sunrot"><path d="M300 48v10M300 126v10M256 92h10M334 92h10M269 61l7 7M324 116l7 7M331 61l-7 7M276 116l-7 7" stroke="#FFE08A" stroke-width="4" stroke-linecap="round" fill="none"/></g><circle class="pulse" cx="300" cy="92" r="28" fill="#FFD257"/>');
+  (kind === 'clear' ? [[92, 78, 1]] : kind === 'partly' ? [[92, 78, 1], [240, 140, .9]] : [[70, 64, 1.5], [215, 52, 1.6], [340, 96, 1.3]]).forEach((a, i) => o += sp(.12 + i * .1, cloud(a[0], a[1], a[2], i)));
+  if (!grey && !night) o += '<g class="bird" style="animation-delay:-6s"><g class="flap"><path d="M0 60q6-6 12 0q6-6 12 0" fill="none" stroke="#35505F" stroke-width="2" stroke-linecap="round"/></g></g><g class="bird" style="animation-delay:-17s;animation-duration:34s"><g class="flap" style="animation-delay:-.2s"><path d="M0 92q5-5 10 0q5-5 10 0" fill="none" stroke="#35505F" stroke-width="1.8" stroke-linecap="round"/></g></g>';
+  o += sp(.15, `<path d="M0 205Q70 150 150 190T290 175T390 195V260H0Z" fill="${far}"/>`, 'rise') + sp(.25, `<path d="M0 225Q90 190 190 220T390 215V270H0Z" fill="${mid}"/>`, 'rise');
+  o += sp(.42, pine(36, 222, 1, 0)) + sp(.48, pine(62, 232, .8, 1)) + sp(.54, pine(338, 214, .9, 2)) + sp(.6, pine(362, 224, 1.05, 3));
+  o += sp(.62, '<rect x="100" y="206" width="40" height="28" fill="#C4432F"/><polygon points="96,206 120,186 144,206" fill="#7B2A22"/><rect x="114" y="214" width="12" height="20" fill="#fff"/><path d="M114 214l12 20M126 214l-12 20" stroke="#C4432F" stroke-width="1.5"/>');
+  o += sp(.3, `<path d="M0 236Q60 228 130 238T260 236T390 240V330H0Z" fill="${wat}"/><g class="wave" style="animation-duration:6s"><path d="M30 262h44M200 280h64M150 252h26" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45" fill="none"/></g><g class="wave" style="animation-duration:8s;animation-delay:-3s"><path d="M96 292h30M300 296h44M20 306h50" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".35" fill="none"/></g>`, 'rise');
+  o += sp(.72, '<rect x="228" y="244" width="162" height="12" fill="#B9824F"/><rect x="228" y="256" width="162" height="4" fill="#8A5A32"/><g fill="#8A5A32"><rect x="248" y="260" width="6" height="26"/><rect x="298" y="260" width="6" height="26"/><rect x="348" y="260" width="6" height="26"/></g><path d="M248 244v12M268 244v12M288 244v12M308 244v12M328 244v12M348 244v12M368 244v12" stroke="#8A5A32" stroke-width="1" opacity=".5"/>');
+  o += sp(.88, '<g class="sway2"><rect x="350" y="214" width="22" height="30" rx="8" fill="#E8843A"/><rect x="352" y="240" width="28" height="8" rx="4" fill="#3C5A8A"/><circle cx="361" cy="206" r="8" fill="#8A5B3C"/><ellipse cx="361" cy="200" rx="16" ry="4" fill="#EBC56B"/><path d="M353 200Q361 186 369 200Z" fill="#EBC56B"/></g>');
+  o += sp(.98, '<g class="rod"><path d="M352 226L262 176" stroke="#5A3B22" stroke-width="2.2" stroke-linecap="round"/><path d="M262 176V268" stroke="#fff" stroke-width="1" opacity=".85"/><g class="bob"><circle cx="262" cy="268" r="4" fill="#E5493A"/></g><ellipse class="ring2" cx="262" cy="271" rx="13" ry="4" fill="none" stroke="#fff" stroke-width="1.5"/></g>');
+  if (!rain) o += '<g class="fish" style="animation-delay:-1s"><path d="M160 272q10-24 26-6q-8 13-26 6z" fill="#EAF4FA"/><path d="M186 266l9-7v14z" fill="#EAF4FA"/></g><g class="splash" style="animation-delay:-1s"><ellipse cx="170" cy="274" rx="12" ry="3" fill="none" stroke="#fff" stroke-width="1.6"/></g>';
+  if (kind === 'fog') o += '<rect class="fogd" y="170" x="-30" width="450" height="130" fill="#fff" opacity=".35"/>';
+  if (rain) for (let k = 0; k < 3; k++) { let s = 7 + k * 31, g = ''; for (let i = 0; i < 16; i++) { s = (s * 73 + 41) % 997; g += `M${s % 400} ${(s * 7) % 260}l-8 24`; } o += `<path class="rain" d="${g}" fill="none" stroke="#EAF2F8" stroke-width="1.6" stroke-linecap="round" opacity=".8" style="animation-duration:${.5 + k * .13}s;animation-delay:-${k * .21}s"/>`; }
+  if (snow) { let s = 11; for (let i = 0; i < 26; i++) { s = (s * 73 + 41) % 997; o += `<circle class="flake" cx="${s % 390}" cy="${(s * 7) % 200}" r="${2 + (s % 3) * .6}" fill="#fff" style="animation-duration:${5 + (s % 5)}s;animation-delay:-${s % 6}s"/>`; } }
   return o + '</svg>';
 }
 
 function renderHome({ c, D, i, today, s, why, w1, sr, ss, R }) {
   const code = today ? c.weather_code : D.weather_code[i], nowT = new Date(c.time), night = today && (nowT < sr || nowT > ss);
-  $('#scHome').innerHTML = scene(skyKind(code), night, 'h'); $('#scWx').innerHTML = scene(skyKind(code), night, 'w');
+  const sk = skyKind(code) + night; [['#scHome', 'h'], ['#scWx', 'w']].forEach(([q, u]) => { const el = $(q); if (el.dataset.k !== sk) { el.innerHTML = scene(skyKind(code), night, u); el.dataset.k = sk; } });
   $('#heroW').classList.toggle('night', night);
   const hr = nowT.getHours();
   $('#hello').textContent = (hr < 5 ? 'Good night' : hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ', ' + (uname || 'angler');
   $('#ring').style.strokeDasharray = (s / 10 * 138.2).toFixed(1) + ' 138.2'; $('#ringn').textContent = s;
   $('#hlabel').textContent = s < 4 ? 'Poor' : s < 6 ? 'Fair' : s < 8 ? 'Good' : 'Excellent'; $('#hwhy').textContent = why.slice(0, 2).join(' · ');
   const temp = today ? Math.round(c.temperature_2m) : Math.round(D.temperature_2m_max[i]), rainMax = Math.max(...R);
-  $('#hTemp').textContent = temp + '°'; $('#hCond').textContent = wmo(code); $('#hRain').textContent = rainMax + '% rain';
+  $('#hTemp').textContent = temp + '°'; $('#temp').dataset.t = $('#hTemp').dataset.t = temp + '°'; $('#ringn').dataset.t = String(s); $('#hCond').textContent = wmo(code); $('#hRain').textContent = rainMax + '% rain';
   $('#hWind').textContent = Math.round(today ? c.wind_speed_10m : D.wind_speed_10m_max[i]) + ' km/h';
   $('#sxPr').textContent = Math.round(today ? c.pressure_msl : avg(data.hourly.pressure_msl.slice(i * 24, i * 24 + 24)));
   const m = moon(D.time[i]); $('#sxMo').textContent = m.pct + '%'; $('#sxMoN').textContent = m.name;
   $('#qaTime').textContent = hm(w1[0]); $('#qaTimeS').textContent = `Dawn ${hm(w1[0])} to ${hm(w1[1])}`;
   $('#qaWx').textContent = temp + '°'; $('#qaWxS').textContent = 'Rain up to ' + rainMax + '% ' + (today ? 'today' : 'that day');
   homeBits(); renderSpots();
+  if (!entered) { entered = true; enter(curView); }
 }
 function homeBits() {
   if (!data) return;
@@ -1126,11 +1200,41 @@ $('#pname').addEventListener('input', e => { uname = e.target.value.trim().slice
 $('#pfplaces').onclick = openPlaces;
 async function refreshLogs() { try { logs = (await logAll()).sort((a, b) => b.ts - a.ts); } catch { logs = []; } homeBits(); }
 
+// motion: staggered pop-ins, count-ups, circle reveal
+const reduceMotion = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch { return false; } })();
+let lastTap = null; document.addEventListener('pointerdown', e => { lastTap = [e.clientX, e.clientY]; }, true);
+const POPS = { today: '.hduo>button,.hh,.hhr,.hsg>*,.hqa,#hckCard,.hspc', wx: '.sheet>.row,#details .d,.sheet>section', ins: '.per,#instats>*,#viewIns>section', prof: '#viewProf>.card,#viewProf .th', feed: '#viewFeed .card', pack: '#viewPack .card,#viewPack .it', wild: '#wlist .wc', log: '#lglist .card,#viewLog .sc2' };
+function stagger(el, v) {
+  if (reduceMotion || !POPS[v]) return; let n = 0;
+  el.querySelectorAll(POPS[v]).forEach(e => { e.style.setProperty('--i', Math.min(n++, 16)); e.classList.remove('pop'); void e.offsetWidth; e.classList.add('pop'); });
+}
+function animateCounts(root) {
+  if (reduceMotion) return;
+  root.querySelectorAll('#temp,#hTemp,#ringn').forEach(el => {
+    const m = /^(-?\d+)(.*)$/.exec((el.dataset.t || el.textContent).trim()); if (!m) return;
+    const to = +m[1], sfx = m[2], from = el.id === 'ringn' ? 0 : to - 4, t0 = performance.now();
+    cancelAnimationFrame(el._raf);
+    const step = t => { const k = Math.min(1, (t - t0) / 800), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(from + (to - from) * e) + sfx; if (k < 1) el._raf = requestAnimationFrame(step); };
+    el._raf = requestAnimationFrame(step);
+  });
+}
+function enter(v) {
+  const el = $(VIEWS[v]); if (!el || el.hidden) return;
+  el.classList.remove('rev', 'swp'); void el.offsetWidth;
+  if (!reduceMotion) {
+    if (['wx', 'pack', 'wild', 'log'].includes(v) && lastTap) { el.style.setProperty('--cx', lastTap[0] + 'px'); el.style.setProperty('--cy', lastTap[1] + 'px'); el.classList.add('rev'); } else el.classList.add('swp');
+    el.querySelectorAll('.scene').forEach(sc => { sc.classList.remove('play'); void sc.offsetWidth; sc.classList.add('play'); });
+  }
+  stagger(el, v); animateCounts(el);
+}
+
 // tabs and sub-screens
-const VIEWS = { today: '#viewToday', wx: '#viewWx', map: '#viewMap', ins: '#viewIns', log: '#viewLog', prof: '#viewProf', pack: '#viewPack', wild: '#viewWild' };
-const HASH = { wx: 'weather', map: 'spots', ins: 'insights', log: 'log', prof: 'profile', pack: 'packing', wild: 'wildlife' };
-const TABOF = { today: 'today', wx: 'today', pack: 'today', wild: 'today', map: 'map', ins: 'ins', log: 'log', prof: 'prof' };
+const VIEWS = { today: '#viewToday', wx: '#viewWx', map: '#viewMap', ins: '#viewIns', log: '#viewLog', feed: '#viewFeed', prof: '#viewProf', pack: '#viewPack', wild: '#viewWild' };
+const HASH = { wx: 'weather', map: 'spots', ins: 'insights', log: 'log', feed: 'feed', prof: 'profile', pack: 'packing', wild: 'wildlife' };
+const TABOF = { today: 'today', wx: 'today', pack: 'today', wild: 'today', map: 'map', ins: 'ins', log: 'ins', feed: 'feed', prof: 'prof' };
+let curView = 'today', entered = false;
 function show(v) {
+  curView = v;
   Object.entries(VIEWS).forEach(([k, sel]) => $(sel).hidden = k !== v);
   document.querySelectorAll('.nb').forEach(b => b.setAttribute('aria-current', b.dataset.v === TABOF[v] ? 'page' : 'false'));
   if (v === 'map') { $('#msub').textContent = 'Around ' + place.name; initMap(); if (map) setTimeout(() => map.invalidateSize(), 60); }
@@ -1139,9 +1243,10 @@ function show(v) {
   if (v === 'ins') renderIns();
   if (v === 'prof') renderProf();
   history.replaceState(null, '', v === 'today' ? location.pathname : '#' + HASH[v]); scrollTo(0, 0);
+  enter(v);
 }
 document.querySelectorAll('.nb').forEach(b => b.onclick = () => show(b.dataset.v));
-document.addEventListener('click', e => { const g = e.target.closest('[data-to]'); if (g) return show(g.dataset.to); if (e.target.closest('[data-back]')) show('today'); });
+document.addEventListener('click', e => { const g = e.target.closest('[data-to]'); if (g) return show(g.dataset.to); const k = e.target.closest('[data-back]'); if (k) show(k.dataset.back || 'today'); });
 { const h = Object.keys(HASH).find(k => '#' + HASH[k] === location.hash); if (h) show(h); }
 
 // drawer
